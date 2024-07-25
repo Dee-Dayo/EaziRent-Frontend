@@ -1,0 +1,34 @@
+.footer{
+    padding: 4% 0;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2%;
+}
+.footer img{
+    width: 200px;
+}
+.footerCopyright{
+    background-color: #edecfb;
+    display: flex;
+    justify-content: space-around;
+    gap: 4%;
+}
+.icons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20%;
+}
+.icons img {
+    width: 20px;
+    height: 20px;
+    margin: auto;
+}
+
+@media only screen and (max-width: 728px){
+    .footer img{
+        display: none;
+    }
+    .footer {
+            text-align: center;
+    }
+}
