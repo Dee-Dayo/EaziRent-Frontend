@@ -1,0 +1,19 @@
+.heroSection{
+    display: flex;
+    justify-content: space-around;
+    background-color: #edecfb;
+}
+.heroSection> div > h1{
+    color: #000929;
+    font-weight: bolder;
+    font-size: 45px;
+}
+
+@media only screen and (max-width: 728px){
+    .heroSection > img{
+        display: none;
+    }
+    .heroSection{
+        padding-top: 0;
+    }
+}
