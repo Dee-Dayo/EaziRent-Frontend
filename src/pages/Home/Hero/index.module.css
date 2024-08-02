@@ -1,19 +1,57 @@
-.heroSection{
+.heroSection {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
     background-color: #edecfb;
+    padding: 20px;
 }
-.heroSection> div > h1{
+
+.header {
+    max-width: 600px;
+}
+
+.header h1 {
     color: #000929;
     font-weight: bolder;
     font-size: 45px;
+    margin-bottom: 10px;
 }
 
-@media only screen and (max-width: 728px){
-    .heroSection > img{
+.header p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.searchArea {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.searchArea input[type='text'],
+.searchArea select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    flex: 1;
+}
+
+.searchArea select {
+    flex: 10;
+}
+
+@media only screen and (max-width: 728px) {
+    .heroSection {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .heroSection > img {
         display: none;
     }
-    .heroSection{
+
+    .header {
         padding-top: 0;
     }
 }
