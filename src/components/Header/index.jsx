@@ -48,7 +48,7 @@ const Header = () => {
 
                         <div className={style.btn}>
                             <p className={style.loginBtn}>Login</p>
-                            <FilledButton name={"Sign Up"}/>
+                            <FilledButton name={"Sign Up"} whereTo={"signup"}/>
                         </div>
                     </>
                 )}

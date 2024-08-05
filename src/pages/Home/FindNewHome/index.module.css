@@ -1,8 +1,7 @@
 .container {
   display: flex;
   justify-content: space-around;
-  padding: 20px;
-  background-color: #f9f9f9;
+  padding: 60px;
 }
 
 .section {
@@ -19,7 +18,7 @@
 }
 
 .section h2 {
-  color: #4a4a80;
+  color: #000929;
   font-size: 1.5em;
   margin-bottom: 10px;
 }

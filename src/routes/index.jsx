@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import Home from "../pages/Home";
+import SignUp from "../pages/Auth/Register";
 
 export const ROUTES = [
     {
@@ -15,5 +16,6 @@ export const ROUTES = [
                 element: <Home/>
             }
         ]
-    }
+    },
+    {path: "signup", element: <SignUp/>}
 ]

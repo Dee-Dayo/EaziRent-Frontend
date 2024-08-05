@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+.container{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.container p{
+    margin-bottom: 30px;
+}
+.image{
+    width: 50%;
+}
+.heroText{
+    width: 50%;
+}
+.holder{
+    width: 60%;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: medium;
+    border: 1px solid grey;
+}
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.btn{
+    background: #aaff00;
+    width: 60%;
+    padding: 10px 10px;
+    cursor: pointer;
+    color: #1a2e35;
+    font-size: large;
+    border: none;
+    border-radius: 5px;
+    font-family: "Comic Sans MS";
+}
+.error{
+    padding:0;
+    color:red;
+    font-size: 0.875em;
+}
+.toggleButton {
+    position: absolute;
+    right: 10%;
+    top: 45%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.aboveButton{
+    display: flex;
+    justify-content: space-evenly;
+    color: #1a2e35;
+}
+.loginAboveButton{
+    display: flex;
+    justify-content: space-evenly;
+}
+.remember{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.remember img{
+    width: 5px;
+}
+
+@media screen and (max-width: 728px) {
+    .container{
+        flex-direction: column;
+        background: #f6fbf1;
+    }
+    .heroText{
+        width: 80%;
+    }
+    .image{
+    width: 80%;
+    }
+    .holder{
+    width: 80%;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: medium;
+    border: 1px solid grey;
+    }
+    .loginAboveButton{
+    display: flex;
+    justify-content: center;
+        gap:30px;
+    }
+    .aboveButton{
+    display: flex;
+    justify-content: space-evenly;
+    color: #1a2e35;
+        gap: 50px;
+    }
+    .aboveButton a{
+        text-decoration: none;
+        color: #1a2e35;
+    }
+    .toggleButton{
+        display: none;
+    }
+}
