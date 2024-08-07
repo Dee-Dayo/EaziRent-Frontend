@@ -1,7 +1,6 @@
- import image from "../../../assets/register.png"
 import React, {useState} from "react";
 import * as Yup from "yup";
-import  axios from "axios";
+import axios from "axios";
 import style from "../../../components/PageTemplate/index.module.css";
 import {toast, ToastContainer} from "react-toastify";
 import {Field, Form, Formik} from "formik";
@@ -12,17 +11,18 @@ import eyeOffIcon from "@iconify/icons-mdi/eye-off";
 import eyeIcon from "@iconify/icons-mdi/eye";
 import {useNavigate} from "react-router-dom";
 import PageTemplate from "../../../components/PageTemplate";
+import image from "../../../assets/register.png";
 
 const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
-   const toggleShowPassword = () => {
+    const toggleShowPassword = () => {
         setShowPassword(!showPassword);
     };
 
-   const validationSchema = Yup.object().shape({
+    const validationSchema = Yup.object().shape({
         firstName: Yup.string()
             .matches(/^[a-zA-Z\s]+$/, 'Name should only contain letters and spaces')
             .required('First Name is required'),
@@ -34,10 +34,12 @@ const SignUp = () => {
             .required('Email address is required'),
         password: Yup.string()
             .required('Password is required'),
-   });
+        role: Yup.string()
+            .oneOf(['renter', 'landlord'], 'Role is required')
+            .required('Role is required'),
+    });
 
     const handleSubscribe = async (values, {resetForm}) => {
-
         setIsLoading(true);
         try {
             const payload = {
@@ -45,8 +47,12 @@ const SignUp = () => {
                 lastName: values.lastName,
                 email: values.email,
                 password: values.password,
+                role: values.role.toUpperCase() === 'RENTER' ? 'RENTER' : 'LANDLORD'
             };
-            const response = await axios.post("the link here", payload); //link here
+
+            const endpoint = values.role === 'renter' ? "http://localhost:8080/api/v1/renter/register" : "http://localhost:8080/api/v1/landlord/register";
+            const response = await axios.post(endpoint, payload);
+
             if (response.data.success) {
                 toast.success(`Hi ${values.firstName}, Welcome to EaziRent`, {
                     position: "top-right",
@@ -56,9 +62,9 @@ const SignUp = () => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    })
+                });
                 resetForm();
-                setTimeout(() =>{
+                setTimeout(() => {
                     navigate("/login");
                 }, 3000);
             } else {
@@ -70,10 +76,10 @@ const SignUp = () => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    })
+                });
             }
         } catch (error) {
-            const errorMessage = error.response.data  //dis is not complete yet
+            const errorMessage = error.response.data;
             toast.error(errorMessage, {
                 position: 'top-right',
                 autoClose: 5000,
@@ -94,7 +100,7 @@ const SignUp = () => {
                       description={"Sign up by entering the information below"}
         >
             <Formik
-                initialValues={{firstName: '', lastName: '', email: '', password: ''}}
+                initialValues={{firstName: '', lastName: '', email: '', password: '', role: ''}}
                 validationSchema={validationSchema}
                 onSubmit={handleSubscribe}
             >
@@ -109,7 +115,7 @@ const SignUp = () => {
                                 value={values.firstName}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                style={{borderColor: errors.firstName && touched.firstName ? 'darkred' : 'inherit',}}
+                                style={{borderColor: errors.firstName && touched.firstName ? 'darkred' : 'inherit'}}
                             />
                             {errors.firstName && touched.firstName &&
                                 <div className={style.error}>{errors.firstName}</div>}
@@ -124,7 +130,7 @@ const SignUp = () => {
                                 value={values.lastName}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                style={{borderColor: errors.lastName && touched.lastName ? 'darkred' : 'inherit',}}
+                                style={{borderColor: errors.lastName && touched.lastName ? 'darkred' : 'inherit'}}
                             />
                             {errors.lastName && touched.lastName &&
                                 <div className={style.error}>{errors.lastName}</div>}
@@ -139,7 +145,7 @@ const SignUp = () => {
                                 value={values.email}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                style={{borderColor: errors.email && touched.email ? 'darkred' : 'inherit',}}
+                                style={{borderColor: errors.email && touched.email ? 'darkred' : 'inherit'}}
                             />
                             {errors.email && touched.email &&
                                 <div className={style.error}>{errors.email}</div>}
@@ -154,13 +160,30 @@ const SignUp = () => {
                                 value={values.password}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                style={{borderColor: errors.password && touched.password ? 'darkred' : 'inherit',}}
+                                style={{borderColor: errors.password && touched.password ? 'darkred' : 'inherit'}}
                             />
                             <button type="button" onClick={toggleShowPassword} className={style.toggleButton}>
                                 <Icon width={24} height={24} icon={showPassword ? eyeOffIcon : eyeIcon}/>
                             </button>
                             {errors.password && touched.password &&
                                 <div className={style.error}>{errors.password}</div>}
+                        </div>
+
+                        <div>
+                            <Field as="select"
+                                   className={style.holder}
+                                   name="role"
+                                   value={values.role}
+                                   onChange={handleChange}
+                                   onBlur={handleBlur}
+                                   style={{borderColor: errors.role && touched.role ? 'darkred' : 'inherit'}}
+                            >
+                                <option value="" label="Select role" />
+                                <option value="renter" label="Renter" />
+                                <option value="landlord" label="Landlord" />
+                            </Field>
+                            {errors.role && touched.role &&
+                                <div className={style.error}>{errors.role}</div>}
                         </div>
 
                         <div className={style.aboveButton}>
