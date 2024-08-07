@@ -41,5 +41,4 @@ const FindNewHome = () => {
         </div>
     );
 }
-
 export default FindNewHome;
