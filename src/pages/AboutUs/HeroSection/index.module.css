@@ -1,0 +1,14 @@
+
+.container{
+    display: flex;
+    justify-content: space-around;
+    padding: 100px;
+    gap: 100px;
+    background-image: url('./../../../assets/about-hero-background.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.container img{
+    width: 350px;
+}
