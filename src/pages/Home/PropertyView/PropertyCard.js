@@ -1,5 +1,6 @@
 import React from 'react';
 import './PropertyGrid.css';
+import bed from "../../../assets/Bed.png";
 
 const PropertyCard = ({ property }) => {
     return (
@@ -12,6 +13,7 @@ const PropertyCard = ({ property }) => {
                     <span>{property.lga}, {property.state}</span>
                 </div>
                 <div className="property-details">
+                    <img src={bed} alt="bed"/>
                     <div>{property.noOfApartments} apartments</div>
                 </div>
             </div>
