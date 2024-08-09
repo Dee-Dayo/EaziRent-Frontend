@@ -13,6 +13,9 @@ const MidSection = ()=>{
                     We believe in fostering a community of trust. We work closely with property owners to ensure that every listing is accurately represented and maintained to the highest standards. For renters, we provide a wealth of resources and support to help you make informed decisions and find a home that suits your lifestyle and needs.
                     Our commitment extends beyond the initial lease signing. We continue to support our users throughout their rental journey, offering maintenance request tools, payment reminders. With EaziRent, you can rest assured that your rental experience will be smooth, safe, and satisfying.
                     Join us at EaziRent, and let’s find your perfect place together.</p>
+                <div className={style.offerSection}>
+                    <h3>We try to offer you best possible homes to stay</h3>
+                </div>
             </div>
             <div className={style.pic_section}>
                 <img className={style.first_image_section} src={image1} alt={""}/>

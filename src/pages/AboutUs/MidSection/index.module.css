@@ -31,3 +31,15 @@
     margin-left: 100px;
     border-radius: 10px 50px 10px 10px;
 }
+
+.offerSection{
+    width: 100%;
+    height: 40px;
+    background: #DFE3E7;
+    margin-top: 30px;
+}
+.offerSection h3{
+    width: 70%;
+    padding: 10px 50px 10px 50px;
+    position: relative;
+}
