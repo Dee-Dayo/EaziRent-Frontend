@@ -1,0 +1,33 @@
+.text_section{
+    width: 50%;
+}
+.container{
+    padding: 10px 100px 10px 100px;
+    display: flex;
+}
+
+.text_section p{
+    font-size: 14px;
+    width: 70%;
+}
+.first_image_section{
+    width: 230px;
+    height: 300px;
+    padding-top: 20px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: #fff;
+    position: relative;
+    border-radius: 10px 10px 10px 50px;
+
+}
+.pic_section{
+    width: 50%;
+}
+.second_pic{
+    margin-top: -250px;
+    width: 60%;
+    height: 370px;
+    margin-left: 100px;
+    border-radius: 10px 50px 10px 10px;
+}

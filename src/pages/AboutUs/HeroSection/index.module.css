@@ -10,6 +10,8 @@
 
 .container img{
     width: 370px;
+    border-bottom-right-radius: 70px;
+    height: 300px;
 }
 
 .container h1{
