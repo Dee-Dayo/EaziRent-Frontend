@@ -13,6 +13,7 @@
 .first_image_section{
     width: 230px;
     height: 300px;
+    margin-left: -50px;
     padding-top: 20px;
     border-width: 7px;
     border-style: solid;
@@ -33,6 +34,9 @@
 }
 
 .offerSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 40px;
     background: #DFE3E7;

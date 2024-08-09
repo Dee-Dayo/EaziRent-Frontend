@@ -3,6 +3,7 @@ import logo from "../../assets/logo.png"
 import FilledButton from "../FilledButton";
 import React, {useState} from "react";
 import Hamburger from "hamburger-react"
+import {Link, useNavigate} from "react-router-dom";
 
 const Header = () => {
     const isMobile = window.innerWidth <= 1080;
@@ -39,9 +40,9 @@ const Header = () => {
                 ) : (
                     <>
                         <div className={style.midSection}>
-                            <p> Home</p>
+                            <p>Home</p>
                             <p>Apartments</p>
-                            <p>About Us</p>
+                            <Link to={"/about"}><p>About us</p></Link>
                             <p>Our Service</p>
                             <p>Contact</p>
                         </div>
