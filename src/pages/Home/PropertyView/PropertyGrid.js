@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropertyCard from './PropertyCard';
 import './PropertyGrid.css';
+import FilledButton from "../../../components/FilledButton";
 
 const PropertyGrid = () => {
     const [properties, setProperties] = useState([]);
+    const [displayCount, setDisplayCount] = useState(3);
 
     useEffect(() => {
         const fetchProperties = async () => {
@@ -21,10 +23,20 @@ const PropertyGrid = () => {
     }, []);
 
     return (
-        <div className="property-grid">
-            {properties && properties.map((property) => (
-                <PropertyCard key={property.id} property={property} />
-            ))}
+        <div className="property-grid-container">
+            <div className="location">
+                <h1>Based on your location</h1>
+                <p>Some of our picked properties near your location</p>
+            </div>
+
+            <div className="property-grid">
+                {properties.slice(0, displayCount).map((property) => (
+                    <PropertyCard key={property.id} property={property}/>
+                ))}
+            </div>
+            <div className="browse-button-container">
+                <FilledButton name={'Browse more properties'}/>
+            </div>
         </div>
     );
 };

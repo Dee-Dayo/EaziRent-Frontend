@@ -1,14 +1,23 @@
-.property-card {
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin: 20px;
-    transition: transform 0.3s;
+.property-grid-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
 }
 
-.property-card:hover {
-    transform: scale(1.05);
+.property-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.property-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 30%;
 }
 
 .property-image {
@@ -19,40 +28,43 @@
 
 .property-info {
     padding: 15px;
+    text-align: left;
 }
 
 .property-price {
-    background-color: #fff;
-    color: #333;
-    font-weight: bold;
-    border-radius: 20px;
-    padding: 5px 10px;
-    display: inline-block;
-    margin-bottom: 10px;
-}
-
-.property-location {
-    color: #666;
-    font-size: 14px;
+    color: #7a7a7a;
+    font-size: 16px;
     margin-bottom: 5px;
 }
 
 .property-name {
     font-size: 18px;
-    margin: 10px 0;
+    margin: 5px 0;
+}
+
+.property-location {
+    color: #7a7a7a;
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .property-details {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    color: #666;
+    color: #7a7a7a;
 }
 
-/* PropertyGrid.css */
-.property-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px;
+.browse-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.location h1{
+    color: #000929;
+}
+.location p{
+    color: #6a6a8a;
+    margin-bottom: 20px;
 }
