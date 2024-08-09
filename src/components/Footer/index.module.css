@@ -1,8 +1,9 @@
 .footer{
-    padding: 4% 0;
+    padding: 2% 0;
     display: flex;
     justify-content: space-evenly;
     gap: 2%;
+    background-color: #edecfb;
 }
 .footer img{
     width: 200px;

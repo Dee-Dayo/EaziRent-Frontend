@@ -52,8 +52,7 @@ const SignUp = () => {
 
             const endpoint = values.role === 'renter' ? "http://localhost:8080/api/v1/renter/register" : "http://localhost:8080/api/v1/landlord/register";
             const response = await axios.post(endpoint, payload);
-
-            if (response.data.success) {
+            if (response.data.status) {
                 toast.success(`Hi ${values.firstName}, Welcome to EaziRent`, {
                     position: "top-right",
                     autoClose: 5000,
@@ -65,7 +64,7 @@ const SignUp = () => {
                 });
                 resetForm();
                 setTimeout(() => {
-                    navigate("/login");
+                    navigate("/home");
                 }, 3000);
             } else {
                 toast.error('Registration failed. Please try again', {
@@ -80,7 +79,7 @@ const SignUp = () => {
             }
         } catch (error) {
             const errorMessage = error.response.data;
-            toast.error(errorMessage, {
+            toast.error(errorMessage.data, {
                 position: 'top-right',
                 autoClose: 5000,
                 hideProgressBar: false,
