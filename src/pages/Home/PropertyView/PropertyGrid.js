@@ -6,13 +6,14 @@ import FilledButton from "../../../components/FilledButton";
 
 const PropertyGrid = () => {
     const [properties, setProperties] = useState([]);
-    const [displayCount, setDisplayCount] = useState(3);
+    const [displayCount] = useState(3);
 
     useEffect(() => {
         const fetchProperties = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/api/v1/property/all');
-                console.log(response.data.properties);
+                console.log(response);
+
                 setProperties(response.data.properties);
             } catch (error) {
                 console.error('Error fetching properties:', error);
