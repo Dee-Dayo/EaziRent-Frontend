@@ -23,6 +23,7 @@
     cursor: pointer;
     font-size: larger;
     color: #000929;
+    text-decoration: none;
 }
 .midSection > p:hover{
     color: #7065f0;
