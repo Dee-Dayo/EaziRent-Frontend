@@ -5,6 +5,8 @@ import twitter from "../../assets/twitter 1.png"
 import style from "./index.module.css"
 
 const Footer = () => {
+    const year = new Date().getFullYear();
+
     return (
         <>
             <div className={style.footer}>
@@ -26,7 +28,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className={style.footerCopyright}>
-                <p>Copyright © 2020 Nexcent ltd. All rights reserved</p>
+                <p>Copyright © {year} Nexcent ltd. All rights reserved</p>
                 <div className={style.icons}>
                     <img src={insta} alt="icon"/>
                     <img src={facebook} alt="icon"/>
