@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import Home from "../pages/Home";
 import SignUp from "../pages/Auth/Register";
 import AboutUs from "../pages/AboutUs";
+import Login from "../pages/Auth/Login";
 
 export const ROUTES = [
     {
@@ -19,6 +20,10 @@ export const ROUTES = [
             {
                 path: "about",
                 element: <AboutUs/>
+            },
+            {
+                path: "login",
+                element: <Login/>
             }
         ]
     },
