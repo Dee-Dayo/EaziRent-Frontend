@@ -19,6 +19,12 @@ const Header = () => {
     const handleLogoClick = () => {
         navigate("/home");
     }
+    const handleAboutClick = ()=>{
+        navigate("/about");
+    }
+    const handleContactClick =()=>{
+        navigate("/contact");
+    }
 
     return (
         <>
@@ -36,7 +42,7 @@ const Header = () => {
                             <div className={style.mobileMenu}>
                                 <div className={style.midSection}>
                                     <p><a href="/home" style={{textDecoration: "none", color: "#4d4d4d"}}> Home</a></p>
-                                    <p>About Us</p>
+                                    <p onClick={handleAboutClick}>About Us</p>
                                     <p><a href="/service" style={{textDecoration: "none", color: "#4d4d4d"}}>Our
                                         Service</a></p>
                                 </div>
@@ -51,11 +57,11 @@ const Header = () => {
                 ) : (
                     <>
                         <div className={style.midSection}>
-                            <p> Home</p>
+                            <p onClick={handleLogoClick}> Home</p>
                             <p>Apartments</p>
-                            <p>About Us</p>
+                            <p onClick={handleAboutClick}>About Us</p>
                             <p>Our Service</p>
-                            <p>Contact</p>
+                            <p onClick={handleContactClick}>Contact</p>
                         </div>
 
                         <div className={style.btn}>
