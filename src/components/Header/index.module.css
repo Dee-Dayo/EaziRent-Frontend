@@ -12,6 +12,9 @@
 .image img{
     width: 200px;
 }
+.image:hover{
+    cursor: pointer;
+}
 .midSection{
     display: flex;
     gap: 60px;
@@ -44,6 +47,9 @@
 .loginBtn a{
     color: #5cb30b;
     text-decoration: none;
+}
+.loginBtn:hover{
+    color: #7065f0;
 }
 .signupBtn a{
     text-decoration: none;

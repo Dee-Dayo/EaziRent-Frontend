@@ -9,7 +9,7 @@ import loadingLoop from "@iconify/icons-line-md/loading-loop";
 import 'react-toastify/dist/ReactToastify.css';
 import eyeOffIcon from "@iconify/icons-mdi/eye-off";
 import eyeIcon from "@iconify/icons-mdi/eye";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import PageTemplate from "../../../components/PageTemplate";
 import image from "../../../assets/register.png";
 
@@ -78,7 +78,7 @@ const SignUp = () => {
                 });
             }
         } catch (error) {
-            const errorMessage = error.response.data;
+            const errorMessage = error.response.data || 'An error occurred';
             toast.error(errorMessage.data, {
                 position: 'top-right',
                 autoClose: 5000,
@@ -177,9 +177,9 @@ const SignUp = () => {
                                    onBlur={handleBlur}
                                    style={{borderColor: errors.role && touched.role ? 'darkred' : 'inherit'}}
                             >
-                                <option value="" label="Select role" />
-                                <option value="renter" label="Renter" />
-                                <option value="landlord" label="Landlord" />
+                                <option value="" label="Select role"/>
+                                <option value="renter" label="Renter"/>
+                                <option value="landlord" label="Landlord"/>
                             </Field>
                             {errors.role && touched.role &&
                                 <div className={style.error}>{errors.role}</div>}

@@ -1,0 +1,33 @@
+.groupedText{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+.questions{
+    width: 401px;
+    font-size: 15px;
+}
+
+
+.groupedText p{
+    font-family: rufina, serif;
+    margin-top: 12px;
+}
+.textSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0 50px 0;
+}
+.textSection h2{
+    font-family: Raleway,serif;
+    margin-bottom: 10px;
+}
+.textSection p{
+    font-family: rufina, serif;
+}
+.tabSpace{
+    word-spacing: 10px;
+}

@@ -3,16 +3,27 @@ import logo from "../../assets/logo.png"
 import FilledButton from "../FilledButton";
 import React, {useState} from "react";
 import Hamburger from "hamburger-react"
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+
+
 
 const Header = () => {
     const isMobile = window.innerWidth <= 1080;
     const [isOpen, setIsOpen] = useState(false);
 
+    const navigate = useNavigate();
+    const handleLogin = () => {
+        navigate("/login");
+    };
+
+    const handleLogoClick = () => {
+        navigate("/home");
+    }
+
     return (
         <>
             <div className={style.nav}>
-                <div className={style.image}>
+                <div className={style.image} onClick={handleLogoClick}>
                     <img src={logo} alt="logo"/>
                 </div>
 
@@ -40,15 +51,15 @@ const Header = () => {
                 ) : (
                     <>
                         <div className={style.midSection}>
-                            <p>Home</p>
+                            <p> Home</p>
                             <p>Apartments</p>
-                            <Link to={"/about"}><p>About us</p></Link>
+                            <p>About Us</p>
                             <p>Our Service</p>
                             <p>Contact</p>
                         </div>
 
                         <div className={style.btn}>
-                            <p className={style.loginBtn}>Login</p>
+                            <p className={style.loginBtn} onClick={handleLogin}>Login</p>
                             <FilledButton name={"Sign Up"} whereTo={"signup"}/>
                         </div>
                     </>
