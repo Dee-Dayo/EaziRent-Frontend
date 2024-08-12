@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import SignUp from "../pages/Auth/Register";
 import AboutUs from "../pages/AboutUs";
 import Login from "../pages/Auth/Login";
+import ContactUs from "../pages/ContactUs";
 
 export const ROUTES = [
     {
@@ -24,6 +25,10 @@ export const ROUTES = [
             {
                 path: "login",
                 element: <Login/>
+            },
+            {
+                path: "contact",
+                element: <ContactUs/>
             }
         ]
     },

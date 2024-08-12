@@ -1,0 +1,64 @@
+.text_section{
+    padding-bottom: 50px;
+}
+.container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 80px 0 170px;
+    margin: 30px 0 30px 0;
+}
+
+
+.text_section h1{
+    font-family: Raleway,serif;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+.text_section p{
+    font-family: rufina,serif;
+    font-size: 14px;
+    line-height: 19px;
+    width: 350px;
+    margin-bottom: 10px;
+}
+.first_image_section{
+    width: 270px;
+    height: auto;
+    margin-left: -10px;
+    margin-top: -20px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: #fff;
+    position: relative;
+    border-radius: 10px 10px 0 50px;
+
+}
+.pic_section{
+    width: 50%;
+    margin-left: -10px;
+}
+.second_pic{
+    margin-top: -250px;
+    width: 350px;
+    height: 470px;
+    margin-left: 100px;
+    border-radius: 10px 50px 10px 10px;
+}
+
+.offerSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+    height: 40px;
+    background: #DFE3E7;
+    position: absolute;
+    margin-top: 0;
+}
+.offerSection h3{
+    width: 70%;
+    padding: 10px 50px 10px 50px;
+    font-size: 14px;
+    font-family: rufina,serif;
+}

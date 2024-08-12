@@ -1,0 +1,63 @@
+.text_section{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px;
+    align-items: center;
+}
+.text_section h1{
+    font-family: rufina, serif;
+}
+.text_section p {
+    margin-top: 10px;
+    font-family: Raleway, serif;
+}
+.container{
+    padding: 50px;
+    background-image: url('../../../assets/about-hero-background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.picture_connect_section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo{
+    width: 32px;
+    height: 32px;
+}
+.picture_connect_section img{
+    width: 480px;
+    height: 353px;
+    border-radius: 4px 4px 4px 60px;
+}
+
+.text_subSection{
+    background: #fff;
+    border-top-right-radius: 60px;
+    height: 353px;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+}
+.text_subSection h3{
+    font-family: Raleway, serif;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 20px;
+}
+.text_subSection p{
+    font-family: Raleway, serif;
+    padding: 10px 30px 7px 30px;
+}
+.textTitle{
+    font-family: rufina, serif;
+}
