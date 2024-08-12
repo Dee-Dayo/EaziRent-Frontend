@@ -25,6 +25,9 @@ const Header = () => {
     const handleContactClick =()=>{
         navigate("/contact");
     }
+    const handlePropertiesClick = () => {
+        navigate("/properties")
+    }
 
     return (
         <>
@@ -58,7 +61,7 @@ const Header = () => {
                     <>
                         <div className={style.midSection}>
                             <p onClick={handleLogoClick}> Home</p>
-                            <p>Apartments</p>
+                            <p onClick={handlePropertiesClick}>Properties</p>
                             <p onClick={handleAboutClick}>About Us</p>
                             <p>Our Service</p>
                             <p onClick={handleContactClick}>Contact</p>

@@ -1,7 +1,7 @@
 import React from 'react';
-import './PropertyGrid.css';
-import bed from "../../../assets/Bed.png";
-import StarRating from "../../../components/StarRating";
+import '../../pages/Home/PropertyView/PropertyGrid.css';
+import bed from "../../assets/Bed.png";
+import StarRating from "../StarRating";
 
 const PropertyCard = ({ property }) => {
     return (

@@ -4,6 +4,7 @@ import SignUp from "../pages/Auth/Register";
 import AboutUs from "../pages/AboutUs";
 import Login from "../pages/Auth/Login";
 import ContactUs from "../pages/ContactUs";
+import Properties from "../pages/Properties";
 
 export const ROUTES = [
     {
@@ -29,6 +30,10 @@ export const ROUTES = [
             {
                 path: "contact",
                 element: <ContactUs/>
+            },
+            {
+                path: "properties",
+                element: <Properties/>
             }
         ]
     },
