@@ -11,7 +11,7 @@ const PropertyGrid = () => {
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/v1/property/all');
+                const response = await axios.get('https://eazirent-latest.onrender.com/api/v1/property/all');
                 console.log(response);
 
                 setProperties(response.data.properties);
