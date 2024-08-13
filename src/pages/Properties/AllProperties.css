@@ -21,3 +21,13 @@
     width: 100%;
 }
 
+@media only screen and (max-width: 728px) {
+    .property-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .property-card {
+        width: 100%;
+    }
+}

@@ -69,7 +69,7 @@
 }
 
 @media only screen and (max-width: 728px) {
-    .property-grid-container {
-        display: none;
-    }
+    /*.property-grid-container {*/
+    /*    display: none;*/
+    /*}*/
 }
