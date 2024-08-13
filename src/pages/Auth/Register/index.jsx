@@ -9,9 +9,9 @@ import loadingLoop from "@iconify/icons-line-md/loading-loop";
 import 'react-toastify/dist/ReactToastify.css';
 import eyeOffIcon from "@iconify/icons-mdi/eye-off";
 import eyeIcon from "@iconify/icons-mdi/eye";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import PageTemplate from "../../../components/PageTemplate";
-import image from "../../../assets/register.png";
+import image from "../../../assets/register.jpg";
 
 const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false);
