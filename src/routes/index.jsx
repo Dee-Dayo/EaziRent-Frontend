@@ -24,10 +24,6 @@ export const ROUTES = [
                 element: <AboutUs/>
             },
             {
-                path: "login",
-                element: <Login/>
-            },
-            {
                 path: "contact",
                 element: <ContactUs/>
             },
@@ -37,5 +33,6 @@ export const ROUTES = [
             }
         ]
     },
-    {path: "signup", element: <SignUp/>}
+    {path: "signup", element: <SignUp/>},
+    {path: "login", element: <Login/>}
 ]

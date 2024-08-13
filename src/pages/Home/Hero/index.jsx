@@ -12,17 +12,22 @@ const Hero = () => {
                     <p>Explore our range of beautiful properties with separate accommodation suitable for you.</p>
                 </div>
                 <div className={style.searchArea}>
-                    <input type="text" placeholder="Location"/>
-                    <select name="type">
-                        <option value="">Condo</option>
-                        <option value="">Duplex</option>
-                        <option value="">Hostel</option>
-                        <option value="">Bungalow</option>
+                    <select name="state">
+                        <option value="">Lagos</option>
+                        <option value="">Abuja</option>
                     </select>
-                    <select name="price-range">
-                        <option value="">100k - 450k</option>
-                        <option value="">500k - 1Mk</option>
-                        <option value="">1.5Mk - 3Mk</option>
+                    <select name="type">
+                        <option value="">One Room</option>
+                        <option value="">Room & Parlour</option>
+                        <option value="">3 Bedroom Flat</option>
+                        <option value="">Double Shared Room</option>
+                        <option value="">Quad Shared Room</option>
+                        <option value="">Boy's Quarters</option>
+                    </select>
+                    <select name="rent-type">
+                        <option value="">Yearly</option>
+                        <option value="">Monthly</option>
+                        <option value="">Half Yearly</option>
                     </select>
                     <FilledButton name={"Search"}/>
                 </div>

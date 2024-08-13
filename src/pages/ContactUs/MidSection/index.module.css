@@ -1,3 +1,7 @@
+.container{
+    background-color: #edecfb;
+}
+
 .groupedText{
     display: flex;
     gap: 30px;
@@ -5,13 +9,9 @@
     margin-bottom: 50px;
 }
 .questions{
-    width: 401px;
-    font-size: 15px;
+    width: 400px;
 }
-
-
 .groupedText p{
-    font-family: rufina, serif;
     margin-top: 12px;
 }
 .textSection{
@@ -22,12 +22,33 @@
     padding: 50px 0 50px 0;
 }
 .textSection h2{
-    font-family: Raleway,serif;
     margin-bottom: 10px;
-}
-.textSection p{
-    font-family: rufina, serif;
 }
 .tabSpace{
     word-spacing: 10px;
+}
+
+@media only screen and (max-width: 728px) {
+    .groupedText {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .questions {
+        width: 90%;
+    }
+
+    .textSection {
+        padding: 20px 0;
+    }
+
+    .textSection h2 {
+        font-size: 1.5em;
+    }
+
+    .textSection p {
+        font-size: 1em;
+        text-align: center;
+    }
 }

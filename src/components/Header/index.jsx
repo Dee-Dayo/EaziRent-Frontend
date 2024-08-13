@@ -76,7 +76,6 @@ const Header = () => {
                         <p onClick={handleLogoClick}> Home</p>
                         <p onClick={handlePropertiesClick}>Properties</p>
                         <p onClick={handleAboutClick}>About Us</p>
-                        <p>Our Service</p>
                         <p onClick={handleContactClick}>Contact</p>
                     </div>
 

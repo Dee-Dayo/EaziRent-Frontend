@@ -11,7 +11,7 @@ import eyeOffIcon from "@iconify/icons-mdi/eye-off";
 import eyeIcon from "@iconify/icons-mdi/eye";
 import { Link, useNavigate } from "react-router-dom";
 import PageTemplate from "../../../components/PageTemplate";
-import image from "../../../assets/register.jpg";
+import image from "../../../assets/login.jpg";
 import Cookies from 'js-cookie';
 
 const Login = () => {

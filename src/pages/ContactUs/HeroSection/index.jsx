@@ -13,9 +13,9 @@ const HeroSection = () => {
                 <img src={picture1} alt={"picture"}/>
                 <div className={style.text_subSection}>
                     <h3>Connect with us</h3>
-                    <p><span className={style.textTitle}>Email</span> eazirenthomes@hotmail.com</p>
-                    <p><span className={style.textTitle}>Phone</span> 09022332244</p>
-                    <p><span className={style.textTitle}>Address</span> Adesanya street, Adekunle, Yaba</p>
+                    <p><span>Email: </span> eazirenthomes@hotmail.com</p>
+                    <p><span>Phone: </span> 09022332244</p>
+                    <p><span>Address: </span> Adesanya street, Adekunle, Yaba</p>
                 </div>
 
             </div>

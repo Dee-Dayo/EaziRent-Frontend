@@ -1,7 +1,7 @@
 import style from './index.module.css'
 const MidSection = ()=>{
     return(
-        <div>
+        <div className={style.container}>
             <div className={style.textSection}>
                 <h2>Frequently asked questions</h2>
                 <p>Everything you need to know about the product and billing.</p>
