@@ -8,7 +8,7 @@ const MidSection = ()=>{
             </div>
             <div className={style.groupedText}>
                 <div className={style.questions}>
-                    <p><span className={style.tabSpace}>+ Where</span> can I find Eazi rent homes and prices</p>
+                    <p><span className={style.tabSpace}>+ Where</span>  can I find Eazi rent homes and prices</p>
                     <p><span className={style.tabSpace}>+ What</span> is included in the price of accommodation</p>
                     <p><span className={style.tabSpace}>+ What</span> is the procedure for arranging and booking
                         accommodation</p>
