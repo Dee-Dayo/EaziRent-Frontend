@@ -16,6 +16,7 @@ const PropertyCard = ({ property }) => {
                     <img src={bed} alt="bed"/>
                     <div>{property.noOfApartments} apartments</div>
                     <p>{property.id}</p>
+                    <p>{property.averageRating} rating</p>
                 </div>
                 <StarRating rating={property.averageRating} />
             </div>
