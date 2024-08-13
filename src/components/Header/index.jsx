@@ -52,29 +52,20 @@ const Header = () => {
             {isMobile ? (
                 <>
                     <div className={style.hamburger}>
-                        <Hamburger toggled={isOpen} toggle={setIsOpen} color="#5cb30b" />
+                        <Hamburger toggled={isOpen} toggle={setIsOpen} color="#000929" />
                     </div>
                     {isOpen && (
                         <div className={style.mobileMenu}>
                             <div className={style.midSection}>
-                                <p>
-                                    <a href="/home" style={{ textDecoration: "none", color: "#4d4d4d" }}>
-                                        Home
-                                    </a>
-                                </p>
+                                <p onClick={handleLogoClick}>Home</p>
+                                <p onClick={handleLogoClick}>Properties</p>
                                 <p onClick={handleAboutClick}>About Us</p>
-                                <p>
-                                    <a href="/service" style={{ textDecoration: "none", color: "#4d4d4d" }}>
-                                        Our Service
-                                    </a>
-                                </p>
+                                <p onClick={handleContactClick}>Contact</p>
                             </div>
 
                             <div className={style.btn}>
-                                <p className={style.loginBtn}>
-                                    <a href="/login">Login</a>
-                                </p>
-                                <FilledButton name={"Sign Up"} />
+                                <p onClick={handleLogin}>Login</p>
+                                <FilledButton name={"Sign Up"} whereTo={"signup"} />
                             </div>
                         </div>
                     )}
