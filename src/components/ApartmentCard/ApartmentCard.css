@@ -1,0 +1,36 @@
+.apartment-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.apartment-card:hover {
+    transform: translateY(-5px);
+}
+
+.apartment-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.apartment-info {
+    padding: 16px;
+}
+
+.apartment-subtype {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.apartment-number, .apartment-price, .apartment-rent-type {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 4px;
+}

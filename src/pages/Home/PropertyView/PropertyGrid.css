@@ -67,3 +67,12 @@
     color: #6a6a8a;
     margin-bottom: 20px;
 }
+.property-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.property-card-link:hover .property-card {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
