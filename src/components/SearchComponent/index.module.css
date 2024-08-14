@@ -1,0 +1,20 @@
+.searchArea {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.searchArea input[type='text'],
+.searchArea select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    flex: 1;
+    margin-bottom: 10px;
+}
+
+.searchArea select {
+    flex: 10;
+}

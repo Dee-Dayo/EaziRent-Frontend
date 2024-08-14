@@ -4,6 +4,7 @@ import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import './AllProperties.css';
 import style from "../Home/Hero/index.module.css";
 import FilledButton from "../../components/FilledButton";
+import SearchComponent from "../../components/SearchComponent";
 
 const AllProperties = () => {
     const [properties, setProperties] = useState([]);
@@ -32,26 +33,7 @@ const AllProperties = () => {
                 <p>Explore all available properties</p>
             </div>
 
-            <div className={style.searchArea}>
-                <select name="state">
-                    <option value="">Lagos</option>
-                    <option value="">Abuja</option>
-                </select>
-                <select name="type">
-                    <option value="">One Room</option>
-                    <option value="">Room & Parlour</option>
-                    <option value="">3 Bedroom Flat</option>
-                    <option value="">Double Shared Room</option>
-                    <option value="">Quad Shared Room</option>
-                    <option value="">Boy's Quarters</option>
-                </select>
-                <select name="rent-type">
-                    <option value="">Yearly</option>
-                    <option value="">Monthly</option>
-                    <option value="">Half Yearly</option>
-                </select>
-                <FilledButton name={"Search"}/>
-            </div>
+            <SearchComponent/>
 
             <div className="property-grid">
                 {properties.map((property) => (

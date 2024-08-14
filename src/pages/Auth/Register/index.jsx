@@ -50,7 +50,7 @@ const SignUp = () => {
                 role: values.role.toUpperCase() === 'RENTER' ? 'RENTER' : 'LANDLORD'
             };
 
-            const endpoint = values.role === 'renter' ? "http://localhost:8080/api/v1/renter/register" : "http://localhost:8080/api/v1/landlord/register";
+            const endpoint = values.role === 'renter' ? "https://eazirent-latest.onrender.com/api/v1/renter/register" : "https://eazirent-latest.onrender.com/api/v1/landlord/register";
             const response = await axios.post(endpoint, payload);
             if (response.data.status) {
                 toast.success(`Hi ${values.firstName}, Welcome to EaziRent`, {
