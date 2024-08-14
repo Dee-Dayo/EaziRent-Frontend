@@ -6,6 +6,7 @@ import Login from "../pages/Auth/Login";
 import ContactUs from "../pages/ContactUs";
 import Properties from "../pages/Properties";
 import PropertyDetails from "../pages/PropertyDetails";
+import ApartmentDetails from "../pages/ApartmentDetails";
 
 export const ROUTES = [
     {
@@ -35,6 +36,10 @@ export const ROUTES = [
             {
                 path:"/property/:id",
                 element: <PropertyDetails/>
+            },
+            {
+                path: "/apartment/:id",
+                element: <ApartmentDetails/>
             }
         ]
     },
