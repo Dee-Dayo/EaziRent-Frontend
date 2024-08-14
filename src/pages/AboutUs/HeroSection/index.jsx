@@ -1,4 +1,4 @@
-import image1 from './../../../assets/juno.jpg'
+import image1 from './../../../assets/ikorodu-lagos.jpg'
 import style from './index.module.css'
 const HeroSection = () => {
     return(
