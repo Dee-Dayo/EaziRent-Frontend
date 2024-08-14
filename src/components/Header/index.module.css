@@ -4,6 +4,12 @@
     background-color: #edecfb;
     padding-left: 20px;
     padding-right: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 99%;
+    /*z-index: 1000;*/
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .image{
     display: flex;
