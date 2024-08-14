@@ -39,7 +39,7 @@ const Login = () => {
                 password: values.password
             };
 
-            const endpoint = "http://localhost:8080/api/v1/auth/login";
+            const endpoint = "https://eazirent-latest.onrender.com/api/v1/auth/login";
             const response = await axios.post(endpoint, payload);
             if (response.data.status) {
                 const token = response.data.data.token;
@@ -123,9 +123,6 @@ const Login = () => {
                                 onBlur={handleBlur}
                                 style={{ borderColor: errors.password && touched.password ? 'darkred' : 'inherit' }}
                             />
-                            <button type="button" onClick={toggleShowPassword} className={style.toggleButton}>
-                                <Icon width={24} height={24} icon={showPassword ? eyeOffIcon : eyeIcon} />
-                            </button>
                             {errors.password && touched.password &&
                                 <div className={style.error}>{errors.password}</div>}
                         </div>
