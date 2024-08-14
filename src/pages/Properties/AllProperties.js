@@ -21,6 +21,10 @@ const AllProperties = () => {
         fetchProperties();
     }, []);
 
+    if (!properties) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className="property-grid-container">
             <div className="location">
