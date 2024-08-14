@@ -1,6 +1,6 @@
 import style from './index.module.css';
-import image1 from './../../../assets/juno.jpg'
-import image2 from './../../../assets/juno_apartment2.jpg'
+import image1 from './../../../assets/interior.jpeg'
+import image2 from './../../../assets/juno.jpg'
 
 
 const MidSection = ()=>{
