@@ -14,7 +14,6 @@ const PropertyDetails = () => {
         const fetchPropertyDetails = async () => {
             try {
                 const response = await axios.get(`https://eazirent-latest.onrender.com/api/v1/property/findBy${id}`);
-                console.log(response.data);
                 setProperty(response.data);
             } catch (error) {
                 console.error('Error fetching property details:', error);
