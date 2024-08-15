@@ -8,6 +8,7 @@ import Properties from "../pages/Properties";
 import PropertyDetails from "../pages/PropertyDetails";
 import ApartmentDetails from "../pages/ApartmentDetails";
 import ApartmentLists from "../pages/ApartmentsLists";
+import Payment from "../pages/Payment/Payment";
 
 export const ROUTES = [
     {
@@ -45,6 +46,10 @@ export const ROUTES = [
             {
                 path: "/apartments",
                 element: <ApartmentLists/>
+            },
+            {
+                path: "/payment",
+                element: <Payment/>
             }
         ]
     },

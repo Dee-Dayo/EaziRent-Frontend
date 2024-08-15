@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import StarRating from '../../components/StarRating';
 import './ApartmentDetails.css';
 import FilledButton from "../../components/FilledButton";
+import Cookies from 'js-cookie';
 
 const ApartmentDetails = () => {
     const { id } = useParams();
@@ -23,13 +24,20 @@ const ApartmentDetails = () => {
         fetchApartmentDetails();
     }, [id]);
 
+    const handlePaymentClick = () => {
+        const token = Cookies.get('EasyRentAuthToken');
+
+    if (!token) {
+        navigate('/login'); // Redirect to login page
+    } else {
+        // Proceed with payment
+        navigate('/payment', { state: { apartmentId: id } });
+    }
+    };
+
     if (!apartment) {
         return <div>Loading...</div>;
     }
-
-    const handleRentClick = () => {
-        navigate('/signup');
-    };
 
     return (
         <div className="apartment-details-container">
@@ -40,7 +48,7 @@ const ApartmentDetails = () => {
                 <p>Type: {apartment.rentType}</p>
                 <p>Subtype: {apartment.subType}</p>
                 <p>Available: {apartment.isAvailable ? "Yes" : "No"}</p>
-                <FilledButton name={'Rent Apartment'} onClick={handleRentClick} />
+                <FilledButton name={'Make Payment'} onClick={handlePaymentClick} />
             </div>
             <div className="apartment-images">
                 {apartment.mediaUrls.map((url, index) => (
@@ -55,5 +63,4 @@ const ApartmentDetails = () => {
         </div>
     );
 };
-
 export default ApartmentDetails;
