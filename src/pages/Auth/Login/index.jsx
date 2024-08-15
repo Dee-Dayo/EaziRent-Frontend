@@ -47,7 +47,7 @@ const Login = () => {
                 const token = response.data.data.token;
                 Cookies.set('EasyRentAuthToken', token, { expires: 1 });
 
-                toast.success(`Welcome back, ${values.email}`, {
+                toast.success(`Welcome back, ${values.firstName}`, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
