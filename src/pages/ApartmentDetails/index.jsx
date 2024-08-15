@@ -53,7 +53,7 @@ const ApartmentDetails = () => {
                 <p>Type: {apartment.rentType}</p>
                 <p>Subtype: {apartment.subType}</p>
                 <p>Available: {apartment.isAvailable ? "Yes" : "No"}</p>
-                <FilledButton name={'Make Payment'} onClick={handlePaymentClick} />
+                <FilledButton name={'Rent Apartment'} onClick={handlePaymentClick} />
             </div>
             <div className="apartment-images">
                 {apartment.mediaUrls.map((url, index) => (

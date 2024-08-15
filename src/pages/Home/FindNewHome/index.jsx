@@ -13,7 +13,7 @@ const FindNewHome = () => {
             <div className={style.introSection}>
                 <h1>The new way to find your new home</h1>
                 <p>Find your dream place to live in with more than 10k+ properties listed.</p>
-                <FilledButton name={"Browse Properties"} whereTo={"properties"}/>
+                <FilledButton name={"Browse Properties"} whereTo={"/properties"}/>
                 <img src={houseIcon} alt="House Icon" className={style.introImage} />
             </div>
             <div className={style.features}>
