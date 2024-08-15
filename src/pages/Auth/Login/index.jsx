@@ -51,8 +51,9 @@ const Login = () => {
                 });
                 resetForm();
                 console.log('User data being sent to Dashboard:', response.data.data);
+                localStorage.setItem("user_data", JSON.stringify(response.data.data));
                 setTimeout(() => {
-                    navigate("/dashboard", { state: { user: response.data.data } });
+                    navigate("/dashboard");
                     }, 3000);
             } else {
                 toast.error('Login failed. Please check your credentials and try again', {

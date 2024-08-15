@@ -1,11 +1,10 @@
 import React from 'react';
 import StarRating from '../../components/StarRating';
 import './index,module.css';
-import { useLocation } from "react-router-dom";
 
 const Dashboard = () => {
-    const location = useLocation();
-    const { user } = location.state || {};
+    const user_data = localStorage.getItem('user_data');
+    const user  = JSON.parse(user_data) || {};
 
     return (
         <div className="dashboard-container">

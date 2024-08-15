@@ -4,11 +4,14 @@ import FilledButton from "../FilledButton";
 import React, { useState, useEffect } from "react";
 import Hamburger from "hamburger-react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
+import {toast} from "react-toastify";
 
 const Header = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1080);
     const [isOpen, setIsOpen] = useState(false);
-
+    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -34,7 +37,50 @@ const Header = () => {
     const handleAboutClick = () => handleNavigation("/about");
     const handleContactClick = () => handleNavigation("/contact");
     const handlePropertiesClick = () => handleNavigation("/properties");
-    const handleLogin = () => handleNavigation("/login");
+    const handleDashboardClick = () => handleNavigation("/dashboard");
+    const handleLogin = () => {
+        localStorage.setItem("isAuthenticated", "true")
+        handleNavigation("/login");
+    };
+    const handleLogout = async () => {
+        try {
+            const token = localStorage.getItem("EasyRentAuthToken");
+            const endpoint = "https://eazirent-latest.onrender.com/api/v1/auth/logout";
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }};
+            const response = await axios.post(endpoint, null, config);
+
+            if (response.status === 204) {
+                Cookies.remove("EasyRentAuthToken");
+                localStorage.removeItem("isAuthenticated");
+                handleNavigation("/home");
+            } else {
+                console.log("response sta",response.status);
+                console.log("response", response)
+                toast.error("An error occurred. Please try again later", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+        } catch (error) {
+            toast.error("An error occurred. Please try again later", {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    };
 
     return (
         <div className={style.nav}>
@@ -57,8 +103,15 @@ const Header = () => {
                             </div>
 
                             <div className={style.btn}>
-                                <p onClick={() => handleNavigation("/login")}>Login</p>
-                                <FilledButton name={"Sign Up"} whereTo={"signup"} />
+                                <p onClick={() => handleNavigation("/dashboard")}>Dashboard</p>
+                                {isAuthenticated ? (
+                                    <p className={style.loginBtn} onClick={handleLogout}>Logout</p>
+                                ) : (
+                                    <>
+                                        <p className={style.loginBtn} onClick={handleLogin}>Login</p>
+                                        <FilledButton name={"Sign Up"} whereTo={"signup"} />
+                                    </>
+                                )}
                             </div>
                         </div>
                     )}
@@ -73,8 +126,15 @@ const Header = () => {
                     </div>
 
                     <div className={style.btn}>
-                        <p className={style.loginBtn} onClick={handleLogin}>Login</p>
-                        <FilledButton name={"Sign Up"} whereTo={"signup"} />
+                        <p className={style.loginBtn} onClick={handleDashboardClick}>Dashboard</p>
+                        {isAuthenticated ? (
+                            <p className={style.loginBtn} onClick={handleLogout}>Logout</p>
+                        ) : (
+                            <>
+                                <p className={style.loginBtn} onClick={handleLogin}>Login</p>
+                                <FilledButton name={"Sign Up"} whereTo={"signup"} />
+                            </>
+                        )}
                     </div>
                 </>
             )}
