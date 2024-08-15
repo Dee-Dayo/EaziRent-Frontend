@@ -40,6 +40,10 @@ export const ROUTES = [
             {
                 path: "/apartment/:id",
                 element: <ApartmentDetails/>
+            },
+            {
+                path: "/apartments",
+                element: <ApartmentDetails/>
             }
         ]
     },

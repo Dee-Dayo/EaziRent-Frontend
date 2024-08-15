@@ -14,7 +14,6 @@ const PropertyDetails = () => {
         const fetchPropertyDetails = async () => {
             try {
                 const response = await axios.get(`https://eazirent-latest.onrender.com/api/v1/property/findBy${id}`);
-                console.log("response; ", response.data)
                 setProperty(response.data);
             } catch (error) {
                 console.error('Error fetching property details:', error);
@@ -39,7 +38,7 @@ const PropertyDetails = () => {
                     alt={landlordName}
                     className="landlord-image"
                 />
-                <h2 className="landlord-name">{landlordName}</h2>
+                <h2 className="landlord-name">Owner: {landlordName}</h2>
                 <StarRating rating={property.landlordRating} />
                 <p className="agentName">Agent Name: {property.agentName}</p>
                 <p className="agentPhone">Agent Phone: {property.agentPhoneNumber}</p>

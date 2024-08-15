@@ -13,19 +13,6 @@ const Footer = () => {
                 <div>
                     <img src={logo} alt="logo"/>
                 </div>
-                <div>
-                    <h4>Rent an Apartment</h4>
-                    <p>Find a property</p>
-                    <p>Find an Apartment</p>
-                    <p>Find a Landlord</p>
-                </div>
-                <div>
-                    <h4>Service</h4>
-                    <p>About us</p>
-                    <p>Contact</p>
-                    <p>Terms & Conditions</p>
-                    <p>Privacy &policy</p>
-                </div>
             </div>
             <div className={style.footerCopyright}>
                 <p>Copyright © {year} Nexcent ltd. All rights reserved</p>

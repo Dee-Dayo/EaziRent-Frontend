@@ -23,25 +23,18 @@ const Header = () => {
         };
     }, []);
 
-    const handleLogin = () => {
-        navigate("/login");
+    const handleNavigation = (path) => {
+        navigate(path);
+        if (isMobile) {
+            setIsOpen(false);
+        }
     };
 
-    const handleLogoClick = () => {
-        navigate("/home");
-    };
-
-    const handleAboutClick = () => {
-        navigate("/about");
-    };
-
-    const handleContactClick = () => {
-        navigate("/contact");
-    };
-
-    const handlePropertiesClick = () => {
-        navigate("/properties");
-    };
+    const handleLogoClick = () => handleNavigation("/home");
+    const handleAboutClick = () => handleNavigation("/about");
+    const handleContactClick = () => handleNavigation("/contact");
+    const handlePropertiesClick = () => handleNavigation("/properties");
+    const handleLogin = () => handleNavigation("/login");
 
     return (
         <div className={style.nav}>
@@ -57,14 +50,14 @@ const Header = () => {
                     {isOpen && (
                         <div className={style.mobileMenu}>
                             <div className={style.midSection}>
-                                <p onClick={handleLogoClick}>Home</p>
-                                <p onClick={handlePropertiesClick}>Properties</p>
-                                <p onClick={handleAboutClick}>About Us</p>
-                                <p onClick={handleContactClick}>Contact</p>
+                                <p onClick={() => handleNavigation("/home")}>Home</p>
+                                <p onClick={() => handleNavigation("/properties")}>Properties</p>
+                                <p onClick={() => handleNavigation("/about")}>About Us</p>
+                                <p onClick={() => handleNavigation("/contact")}>Contact</p>
                             </div>
 
                             <div className={style.btn}>
-                                <p onClick={handleLogin}>Login</p>
+                                <p onClick={() => handleNavigation("/login")}>Login</p>
                                 <FilledButton name={"Sign Up"} whereTo={"signup"} />
                             </div>
                         </div>

@@ -12,7 +12,6 @@ const PropertyGrid = () => {
         const fetchProperties = async () => {
             try {
                 const response = await axios.get('https://eazirent-latest.onrender.com/api/v1/property/all');
-                console.log(response);
 
                 setProperties(response.data.properties);
             } catch (error) {

@@ -1,29 +1,29 @@
 import React from 'react';
-import styles from './ApartmentList.module.css';
-import StarRating from "../../components/StarRating";
+import { useLocation } from 'react-router-dom';
 
-const ApartmentList = ({ apartments }) => {
+const ApartmentLists = () => {
+    const location = useLocation();
+    const apartments = location.state?.apartments || [];
+
     return (
-        <div className={styles.apartmentList}>
-            {apartments.map(apartment => (
-                <div key={apartment.id} className={styles.apartmentItem}>
-                    <img
-                        src={apartment.mediaUrls ? apartment.mediaUrls[0] : '/default.png'}
-                        alt={`Apartment ${apartment.number}`}
-                        className={styles.apartmentImage}
-                    />
-                    <div className={styles.apartmentDetails}>
-                        <h3>Apartment {apartment.number}</h3>
-                        <p>Price: ${apartment.price}</p>
+        <div>
+            <h1>Available Apartments</h1>
+            {apartments.length > 0 ? (
+                apartments.map((apartment, index) => (
+                    <div key={index}>
+                        <img src={apartment.imageUrl} alt={`Apartment ${index + 1}`} />
+                        <p>Apartment Number: {apartment.apartmentNumber}</p>
+                        <p>Price: {apartment.price}</p>
+                        <p>Rating: {apartment.rating}</p>
                         <p>Rent Type: {apartment.rentType}</p>
-                        <p>Type: {apartment.subType}</p>
-                        <p>Status: {apartment.isAvailable ? 'Available' : 'Not Available'}</p>
-                        <StarRating rating={apartment.ratings} />
+                        <p>Subtype: {apartment.subtype}</p>
                     </div>
-                </div>
-            ))}
+                ))
+            ) : (
+                <p>No apartments found.</p>
+            )}
         </div>
     );
 };
 
-export default ApartmentList;
+export default ApartmentLists;

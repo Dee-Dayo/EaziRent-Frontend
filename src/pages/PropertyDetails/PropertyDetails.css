@@ -4,15 +4,16 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    padding-top: 80px;
 }
 
-.landlord-details {
-    flex: 1;
+.landlord-info {
+    flex: 1.5; /* Increase the flex value to make the div wider */
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
-    padding: 20px;
+    background-color: #edecfb;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -28,16 +29,12 @@
 .landlord-name {
     font-size: 20px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
-.landlord-rating, .agent-phone {
-    font-size: 16px;
-    color: #7a7a7a;
-    margin-bottom: 5px;
-}
-
-.property-apartments {
-    flex: 3;
+.landlord-rating, .agentPhone, .agentName {
+    margin-bottom: 20px;
+    text-align: center; /* Center the text */
 }
 
 .property-grid {
@@ -47,13 +44,26 @@
     margin-top: 20px;
 }
 
+.property-grid > div {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300px; /* Ensure a consistent height */
+    aspect-ratio: 1/1; /* Maintain a square aspect ratio */
+}
+
 @media only screen and (max-width: 728px) {
     .property-details-container {
         flex-direction: column;
     }
 
-    .landlord-details {
+    .landlord-info {
         margin-bottom: 20px;
+        width: 100%; /* Ensure full width on mobile */
     }
 
     .property-grid {
