@@ -64,7 +64,7 @@ const SignUp = () => {
                 });
                 resetForm();
                 setTimeout(() => {
-                    navigate("/home");
+                    navigate("/login");
                 }, 3000);
             } else {
                 toast.error('Registration failed. Please try again', {

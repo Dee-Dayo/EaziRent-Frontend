@@ -1,0 +1,49 @@
+.dashboard-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 80px;
+}
+
+.user-info {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #edecfb;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.user-name {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.user-rating, .user-email, .response-time, .user-role {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+@media only screen and (max-width: 728px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .user-info {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+}

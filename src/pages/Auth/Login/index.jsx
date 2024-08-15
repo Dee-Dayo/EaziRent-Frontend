@@ -41,8 +41,6 @@ const Login = () => {
                 const token = response.data.data.token;
                 Cookies.set('EasyRentAuthToken', token, { expires: 1 });
 
-                console.log('Stored token:', token);
-
                 toast.success(`Welcome back, ${values.email}`, {
                     position: "top-right",
                     autoClose: 5000,
@@ -53,9 +51,10 @@ const Login = () => {
                     progress: undefined,
                 });
                 resetForm();
+                console.log('User data being sent to Dashboard:', response.data.data);
                 setTimeout(() => {
-                    navigate("/home");
-                }, 3000);
+                    navigate("/dashboard", { state: { user: response.data.data } });
+                    }, 3000);
             } else {
                 toast.error('Login failed. Please check your credentials and try again', {
                     position: "top-right",
