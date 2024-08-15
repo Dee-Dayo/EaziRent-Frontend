@@ -7,8 +7,6 @@ import { Field, Form, Formik } from "formik";
 import { Icon } from "@iconify/react";
 import loadingLoop from "@iconify/icons-line-md/loading-loop";
 import 'react-toastify/dist/ReactToastify.css';
-import eyeOffIcon from "@iconify/icons-mdi/eye-off";
-import eyeIcon from "@iconify/icons-mdi/eye";
 import { Link, useNavigate } from "react-router-dom";
 import PageTemplate from "../../../components/PageTemplate";
 import image from "../../../assets/login.jpg";
@@ -18,10 +16,6 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-
-    const toggleShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
 
     const validationSchema = Yup.object().shape({
         email: Yup.string()
@@ -41,13 +35,12 @@ const Login = () => {
 
             const endpoint = "https://eazirent-latest.onrender.com/api/v1/auth/login";
             const response = await axios.post(endpoint, payload);
-            console.log("trying it out")
-            console.log(response.data)
+
             if (response.data.status) {
                 const token = response.data.data.token;
                 Cookies.set('EasyRentAuthToken', token, { expires: 1 });
 
-                toast.success(`Welcome back, ${values.firstName}`, {
+                toast.success(`Welcome back, ${response.data.data.firstName.toUpperCase()}`, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -57,9 +50,10 @@ const Login = () => {
                     progress: undefined,
                 });
                 resetForm();
+                console.log('User data being sent to Dashboard:', response.data.data);
                 setTimeout(() => {
-                    navigate("/home");
-                }, 3000);
+                    navigate("/dashboard", { state: { user: response.data.data } });
+                    }, 3000);
             } else {
                 toast.error('Login failed. Please check your credentials and try again', {
                     position: "top-right",

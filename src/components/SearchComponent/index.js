@@ -10,16 +10,14 @@ const SearchComponent = () => {
     const [rentType, setRentType] = useState('');
     const navigate = useNavigate();
 
+
     const handleSearch = async () => {
         try {
-            const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/apartment/filterApartment', {
+            const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/apartment/filter', {
                 state,
                 type,
                 rentType
             });
-            console.log(response)
-
-            // Navigate to the apartments page with search results
             navigate('/apartments', { state: { apartments: response.data.data.apartments } });
         } catch (error) {
             console.error('Error fetching apartments:', error);
@@ -30,8 +28,8 @@ const SearchComponent = () => {
         <div className={styles.searchArea}>
             <select name="state" value={state} onChange={(e) => setState(e.target.value)}>
                 <option value="">Select State</option>
-                <option value="Lagos">Lagos</option>
-                <option value="Abuja">Abuja</option>
+                <option value="LAGOS">Lagos</option>
+                <option value="ABUJA">Abuja</option>
             </select>
 
             <select name="type" value={type} onChange={(e) => setType(e.target.value)}>
@@ -39,9 +37,11 @@ const SearchComponent = () => {
                 <option value="ONE_ROOM">One Room</option>
                 <option value="ROOM_AND_PARLOUR">Room & Parlour</option>
                 <option value="THREE_BEDROOM_FLAT">3 Bedroom Flat</option>
+                <option value="STUDIO">Studio</option>
                 <option value="DOUBLE_SHARED_ROOM">Double Shared Room</option>
                 <option value="QUAD_SHARED_ROOM">Quad Shared Room</option>
                 <option value="BOYS_QUARTERS">Boy's Quarters</option>
+                <option value="LOFT">Loft</option>
             </select>
 
             <select name="rent-type" value={rentType} onChange={(e) => setRentType(e.target.value)}>

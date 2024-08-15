@@ -1,0 +1,17 @@
+.payment-page-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.loading {
+    font-size: 18px;
+    color: #333;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 20px;
+}
