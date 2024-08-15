@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import StarRating from '../../components/StarRating';
 import './ApartmentDetails.css';
+import FilledButton from "../../components/FilledButton";
 
 const ApartmentDetails = () => {
     const { id } = useParams();
     const [apartment, setApartment] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchApartmentDetails = async () => {
@@ -25,6 +27,10 @@ const ApartmentDetails = () => {
         return <div>Loading...</div>;
     }
 
+    const handleRentClick = () => {
+        navigate('/signup');
+    };
+
     return (
         <div className="apartment-details-container">
             <div className="apartment-info">
@@ -34,6 +40,7 @@ const ApartmentDetails = () => {
                 <p>Type: {apartment.rentType}</p>
                 <p>Subtype: {apartment.subType}</p>
                 <p>Available: {apartment.isAvailable ? "Yes" : "No"}</p>
+                <FilledButton name={'Rent Apartment'} onClick={handleRentClick} />
             </div>
             <div className="apartment-images">
                 {apartment.mediaUrls.map((url, index) => (

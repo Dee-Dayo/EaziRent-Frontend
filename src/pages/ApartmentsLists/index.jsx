@@ -1,24 +1,21 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import ApartmentCard from "../../components/ApartmentCard";
+import './ApartmentLists.css'
 
 const ApartmentLists = () => {
     const location = useLocation();
     const apartments = location.state?.apartments || [];
 
     return (
-        <div>
+        <div className="container">
             <h1>Available Apartments</h1>
             {apartments.length > 0 ? (
-                apartments.map((apartment, index) => (
-                    <div key={index}>
-                        <img src={apartment.imageUrl} alt={`Apartment ${index + 1}`} />
-                        <p>Apartment Number: {apartment.apartmentNumber}</p>
-                        <p>Price: {apartment.price}</p>
-                        <p>Rating: {apartment.rating}</p>
-                        <p>Rent Type: {apartment.rentType}</p>
-                        <p>Subtype: {apartment.subtype}</p>
-                    </div>
-                ))
+                <div className="apartment-list">
+                    {apartments.map((apartment, index) => (
+                        <ApartmentCard key={index} apartment={apartment} />
+                    ))}
+                </div>
             ) : (
                 <p>No apartments found.</p>
             )}

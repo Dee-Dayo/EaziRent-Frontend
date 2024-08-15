@@ -7,6 +7,7 @@ import ContactUs from "../pages/ContactUs";
 import Properties from "../pages/Properties";
 import PropertyDetails from "../pages/PropertyDetails";
 import ApartmentDetails from "../pages/ApartmentDetails";
+import ApartmentLists from "../pages/ApartmentsLists";
 
 export const ROUTES = [
     {
@@ -43,7 +44,7 @@ export const ROUTES = [
             },
             {
                 path: "/apartments",
-                element: <ApartmentDetails/>
+                element: <ApartmentLists/>
             }
         ]
     },

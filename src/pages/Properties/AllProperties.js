@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import './AllProperties.css';
-import style from "../Home/Hero/index.module.css";
-import FilledButton from "../../components/FilledButton";
 import SearchComponent from "../../components/SearchComponent";
 
 const AllProperties = () => {
