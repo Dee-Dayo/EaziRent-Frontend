@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigate} from "react-router-dom";
 import StarRating from '../../components/StarRating';
 import './index,module.css';
 import defaultProfileImage from '../../assets/landlord.png';
@@ -6,6 +7,7 @@ import AddPropertyDialog from '../../pages/AddPropertyDialog';
 import FilledButton from "../../components/FilledButton";
 
 const Dashboard = () => {
+    const navigate = useNavigate();
     const user_data = localStorage.getItem('user_data');
     const user  = JSON.parse(user_data) || {};
     const [openDialog, setOpenDialog] = useState(false);
@@ -24,6 +26,10 @@ const Dashboard = () => {
     const handleCloseDialog = () => {
         setOpenDialog(false);
     };
+    const handlePropertiesClick =()=>{
+        const landlordId = user?.id;
+        navigate(`/dashboard/properties?landlordId=${landlordId}`);
+    }
 
     return (
         <div className="dashboard-container">
@@ -44,6 +50,7 @@ const Dashboard = () => {
             {user?.role === "LANDLORD" && (
                 <div className="add-property">
                     <FilledButton name="Add Property" onClick={handleAddPropertyClick} />
+                    <FilledButton name="My Properties" onClick={handlePropertiesClick} />
                 </div>
             )}
 
