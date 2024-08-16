@@ -58,7 +58,7 @@ const PropertyDetails = () => {
 
         try {
             //TODO: change url to deployed endpoint
-            const url = 'http://localhost:8080/api/v1/renter/reviewProperty';
+            const url = 'https://eazirent-latest.onrender.com/api/v1/renter/reviewProperty';
             const response = await axios.post(url, payload, config);
             console.log(response.data);
             if (response.data.status) {
