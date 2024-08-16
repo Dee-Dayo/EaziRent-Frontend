@@ -10,6 +10,7 @@ import ApartmentDetails from "../pages/ApartmentDetails";
 import ApartmentLists from "../pages/ApartmentsLists";
 import Payment from "../pages/Payment/Payment";
 import Dashboard from "../pages/Dashboard";
+import AddApartment from "../pages/Apartment";
 
 export const ROUTES = [
     {
@@ -55,6 +56,10 @@ export const ROUTES = [
             {
                 path: "/dashboard",
                 element: <Dashboard/>
+            },
+            {
+                path: "/property/:id/apartments/add",
+                element: <AddApartment/>
             }
         ]
     },
