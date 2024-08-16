@@ -36,9 +36,12 @@ const Login = () => {
             const endpoint = "https://eazirent-latest.onrender.com/api/v1/auth/login";
             const response = await axios.post(endpoint, payload);
 
+            console.log(response.data)
+
             if (response.data.status) {
                 const token = response.data.data.token;
                 Cookies.set('EasyRentAuthToken', token, { expires: 1 });
+                console.log(token)
 
                 toast.success(`Welcome back, ${response.data.data.firstName.toUpperCase()}`, {
                     position: "top-right",
