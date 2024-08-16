@@ -35,7 +35,7 @@ const PropertyGrid = () => {
                 ))}
             </div>
             <div className="browse-button-container">
-                <FilledButton name={'Browse more properties'} whereTo={"properties"}/>
+                <FilledButton name={'Browse more properties'} whereTo={"/properties"}/>
             </div>
         </div>
     );
