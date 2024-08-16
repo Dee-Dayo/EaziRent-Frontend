@@ -133,7 +133,7 @@ const Header = () => {
                         ) : (
                             <>
                                 <p className={style.loginBtn} onClick={handleLogin}>Login</p>
-                                <FilledButton name={"Sign Up"} whereTo={"signup"} />
+                                <FilledButton name={"Sign Up"} whereTo={"/signup"} />
                             </>
                         )}
                     </div>
