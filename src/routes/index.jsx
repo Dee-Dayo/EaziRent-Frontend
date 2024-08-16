@@ -63,7 +63,7 @@ export const ROUTES = [
                 element: <AddApartment/>
             },
             {
-                path: "/dashboard/properties/:landlordId",
+                path: "/dashboard/properties",
                 element: <LandlordProperties/>
             }
         ]

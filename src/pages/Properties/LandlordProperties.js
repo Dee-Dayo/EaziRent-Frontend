@@ -3,33 +3,38 @@ import axios from 'axios';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import './AllProperties.css';
 import FilledButton from "../../components/FilledButton";
-import {useLocation} from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
 
 const LandlordProperties = () => {
     const [properties, setProperties] = useState([]);
-    const location = useLocation();
-
-    const queryParams = new URLSearchParams(location.search);
-    const landlordId = queryParams.get('landlordId');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                const response = await axios.get(`https://eazirent-latest.onrender.com/api/v1/property/findByLanlordId/${landlordId}`);
+                // Decode the token from cookies
+                const token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
+                const decodedToken = jwtDecode(token);
+                const email = decodedToken.email; // Adjust as per your token payload
+                console.log(token)
 
-                setProperties(response.data.properties);
+                // Fetch properties with email address
+                const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/findByLandlord', {
+                    email: email
+                });
+
+                setProperties(response.data.response.properties); // Adjust according to your API response structure
             } catch (error) {
                 console.error('Error fetching properties:', error);
+            } finally {
+                setIsLoading(false);
             }
         };
 
-        if (landlordId) {
-            fetchProperties();
-        }
-    }, [landlordId]);
+        fetchProperties();
+    }, []);
 
-
-    if (!properties) {
+    if (isLoading) {
         return <div>Loading...</div>;
     }
 
@@ -41,9 +46,13 @@ const LandlordProperties = () => {
             <FilledButton name={"Add Property"} onClick={"/"} whereTo={"/"}/>
 
             <div className="property-grid">
-                {properties.map((property) => (
-                    <PropertyCard key={property.id} property={property}/>
-                ))}
+                {properties.length > 0 ? (
+                    properties.map((property) => (
+                        <PropertyCard key={property.id} property={property}/>
+                    ))
+                ) : (
+                    <p>No properties found.</p>
+                )}
             </div>
         </div>
     );
