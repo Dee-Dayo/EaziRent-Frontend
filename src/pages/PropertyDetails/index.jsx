@@ -47,6 +47,7 @@ const PropertyDetails = () => {
             comment: comment,
             email: localStorage.getItem("email")
         }
+        console.log(payload)
         const token = Cookies.get("EasyRentAuthToken");
         console.log("token", token);
         const config = {

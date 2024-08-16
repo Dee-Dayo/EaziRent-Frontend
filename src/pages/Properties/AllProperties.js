@@ -11,18 +11,21 @@ const AllProperties = () => {
         const fetchProperties = async () => {
             try {
                 const response = await axios.get('https://eazirent-latest.onrender.com/api/v1/property/all');
-                setProperties(response.data.properties);
+                const fetchedProperties = response.data.properties;
+
+                // Reverse the order of properties
+                const reversedProperties = fetchedProperties.reverse();
+
+                setProperties(reversedProperties);
             } catch (error) {
                 console.error('Error fetching properties:', error);
             }
         };
 
-        console.log(properties)
-
         fetchProperties();
     }, []);
 
-    if (!properties) {
+    if (!properties.length) {
         return <div>Loading...</div>;
     }
 

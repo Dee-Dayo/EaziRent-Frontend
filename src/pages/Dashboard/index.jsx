@@ -29,7 +29,8 @@ const Dashboard = () => {
 
     const handlePropertiesClick = () => {
         const landlordId = user?.id;
-        navigate(`/dashboard/properties?landlordId=${landlordId}`);
+        navigate('/dashboard/properties?landlordId=${landlordId}');
+
     };
 
     return (
