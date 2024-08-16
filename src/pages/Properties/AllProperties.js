@@ -17,6 +17,8 @@ const AllProperties = () => {
             }
         };
 
+        console.log(properties)
+
         fetchProperties();
     }, []);
 
