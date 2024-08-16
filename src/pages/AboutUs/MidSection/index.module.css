@@ -13,6 +13,7 @@
 .text_section h1{
     padding-top: 30px;
     padding-bottom: 20px;
+    color: #000929;
 }
 .text_section p{
     line-height: 19px;
