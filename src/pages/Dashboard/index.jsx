@@ -12,17 +12,14 @@ const Dashboard = () => {
     const user = JSON.parse(user_data) || {};
     const [openDialog, setOpenDialog] = useState(false);
 
-    // Determine the profile image to use
     const profileImage = user?.mediaUrl && user.mediaUrl !== "default"
         ? user.mediaUrl
         : defaultProfileImage;
 
-    // Handler for opening the add property dialog
     const handleAddPropertyClick = () => {
         setOpenDialog(true);
     };
 
-    // Handler for closing the add property dialog
     const handleCloseDialog = () => {
         setOpenDialog(false);
     };
