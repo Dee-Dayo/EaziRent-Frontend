@@ -1,7 +1,13 @@
 .container{
-    padding-top: 100px;
+    padding-top: 120px;
 }
-
+.container h1{
+    text-align: center;
+    color: #000929;
+}
+.container p{
+    text-align: center;
+}
 
 .apartment-list {
     display: grid;
@@ -46,4 +52,16 @@
 .apartment-price,
 .apartment-rent-type {
     margin: 5px 0;
+}
+
+
+@media only screen and (max-width: 728px) {
+    .container{
+    padding-top: 80px;
+    }
+
+    .apartment-list {
+    grid-template-columns: 1fr;
+        gap: 10px;
+}
 }
