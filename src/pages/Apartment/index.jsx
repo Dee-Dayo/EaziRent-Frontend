@@ -27,7 +27,7 @@ const AddApartment = () => {
         formData.append('mediaFile', mediaFile);
 
         try {
-            const response = await axios.post('https://eazirent-latest.onrender.comapi/v1/apartment/add', formData, {
+            const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/apartment/add', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
