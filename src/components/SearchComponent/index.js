@@ -29,7 +29,6 @@ const SearchComponent = () => {
             <select name="state" value={state} onChange={(e) => setState(e.target.value)}>
                 <option value="">Select State</option>
                 <option value="LAGOS">Lagos</option>
-                <option value="ABUJA">Abuja</option>
             </select>
 
             <select name="type" value={type} onChange={(e) => setType(e.target.value)}>

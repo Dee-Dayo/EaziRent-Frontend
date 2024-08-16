@@ -3,7 +3,7 @@
     margin: 0 auto;
     padding: 20px;
     text-align: center;
-    padding-top: 80px;
+    padding-top: 120px;
 }
 
 .property-grid {
@@ -31,5 +31,9 @@
 
     .property-card {
         width: 100%;
+    }
+
+    .property-grid-container {
+        padding-top: 80px;
     }
 }
