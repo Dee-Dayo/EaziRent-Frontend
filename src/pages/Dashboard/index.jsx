@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import StarRating from '../../components/StarRating';
 import './index,module.css';
 import defaultProfileImage from '../../assets/landlord.png';
@@ -26,38 +26,40 @@ const Dashboard = () => {
     const handleCloseDialog = () => {
         setOpenDialog(false);
     };
-    const handlePropertiesClick =()=>{
+
+    const handlePropertiesClick = () => {
         const landlordId = user?.id;
         navigate(`/dashboard/properties?landlordId=${landlordId}`);
-    }
+    };
 
     return (
-        <div className="dashboard-container">
-            <div className="user-info">
-                <img
-                    src={profileImage}
-                    alt={`${user?.firstName || "User"} ${user?.lastName || ""}`}
-                    className="user-image"
-                />
-                <h2 className="user-name">Welcome, {user?.firstName} {user?.lastName}</h2>
-                <StarRating rating={user?.rating || 0} />
-                <p className="user-email">Email: {user?.email}</p>
-                <p className="response-time">Last Login: {user?.responseTime}</p>
-                <p className="user-role">Role: {user?.role}</p>
-            </div>
-
-            {/* Conditionally render the Add Property button if the user is a LANDLORD */}
-            {user?.role === "LANDLORD" && (
-                <div className="add-property">
-                    <FilledButton name="Add Property" onClick={handleAddPropertyClick} />
-                    <FilledButton name="My Properties" onClick={handlePropertiesClick} />
-                </div>
-            )}
-
-            {/* Render the AddPropertyDialog component */}
-            <AddPropertyDialog open={openDialog} onClose={handleCloseDialog} />
+    <div className="dashboard-container">
+        <div className="user-info">
+            <img
+                src={profileImage}
+                alt={`${user?.firstName || "User"} ${user?.lastName || ""}`}
+                className="user-image"
+            />
+            <h2 className="user-name">Welcome, {user?.firstName} {user?.lastName}</h2>
+            <StarRating rating={user?.rating || 0} />
+            <p className="user-email">Email: {user?.email}</p>
+            <p className="response-time">Last Login: {user?.responseTime}</p>
+            <p className="user-role">Role: {user?.role}</p>
         </div>
-    );
+
+        {user?.role === "LANDLORD" && (
+            <div className="add-property">
+                <FilledButton name="Add Property" onClick={handleAddPropertyClick} />
+                <FilledButton name="My Properties" onClick={handlePropertiesClick} />
+                <FilledButton name="Calms" />
+                <FilledButton name="Calms" />
+            </div>
+        )}
+
+        <AddPropertyDialog open={openDialog} onClose={handleCloseDialog} />
+    </div>
+);
+
 };
 
 export default Dashboard;

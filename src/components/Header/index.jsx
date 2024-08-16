@@ -1,12 +1,12 @@
-import style from "./index.module.css";
-import logo from "../../assets/logo.png";
-import FilledButton from "../FilledButton";
 import React, { useState, useEffect } from "react";
-import Hamburger from "hamburger-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
+import Hamburger from "hamburger-react";
+import FilledButton from "../FilledButton";
+import style from "./index.module.css";
+import logo from "../../assets/logo.png";
 
 const Header = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1080);
@@ -34,12 +34,8 @@ const Header = () => {
     };
 
     const handleLogoClick = () => handleNavigation("/home");
-    const handleAboutClick = () => handleNavigation("/about");
-    const handleContactClick = () => handleNavigation("/contact");
-    const handlePropertiesClick = () => handleNavigation("/properties");
-    const handleDashboardClick = () => handleNavigation("/dashboard");
     const handleLogin = () => {
-        localStorage.setItem("isAuthenticated", "true")
+        localStorage.setItem("isAuthenticated", "true");
         handleNavigation("/login");
     };
     const handleLogout = async () => {
@@ -48,18 +44,16 @@ const Header = () => {
             const endpoint = "https://eazirent-latest.onrender.com/api/v1/auth/logout";
             const config = {
                 headers: {
-                    'Authorization': `Bearer ${token}`
-                }};
+                    Authorization: `Bearer ${token}`,
+                },
+            };
             const response = await axios.post(endpoint, null, config);
-            console.log(response);
 
             if (response.status === 204) {
                 Cookies.remove("EasyRentAuthToken");
                 localStorage.removeItem("isAuthenticated");
                 handleNavigation("/home");
             } else {
-                console.log("response sta",response.status);
-                console.log("response", response)
                 toast.error("An error occurred. Please try again later", {
                     position: "top-right",
                     autoClose: 5000,
@@ -67,18 +61,16 @@ const Header = () => {
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
-                    progress: undefined,
                 });
             }
         } catch (error) {
             toast.error("An error occurred. Please try again later", {
-                position: 'top-right',
+                position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
-                progress: undefined,
             });
         }
     };
@@ -97,14 +89,17 @@ const Header = () => {
                     {isOpen && (
                         <div className={style.mobileMenu}>
                             <div className={style.midSection}>
-                                <p onClick={() => handleNavigation("/home")}>Home</p>
-                                <p onClick={() => handleNavigation("/properties")}>Properties</p>
-                                <p onClick={() => handleNavigation("/about")}>About Us</p>
-                                <p onClick={() => handleNavigation("/contact")}>Contact</p>
+                                {!isAuthenticated && (
+                                    <>
+                                        <p onClick={() => handleNavigation("/home")}>Home</p>
+                                        <p onClick={() => handleNavigation("/properties")}>Properties</p>
+                                        <p onClick={() => handleNavigation("/about")}>About Us</p>
+                                        <p onClick={() => handleNavigation("/contact")}>Contact</p>
+                                    </>
+                                )}
                             </div>
 
                             <div className={style.btn}>
-                                <p onClick={() => handleNavigation("/dashboard")}>Dashboard</p>
                                 {isAuthenticated ? (
                                     <p className={style.loginBtn} onClick={handleLogout}>Logout</p>
                                 ) : (
@@ -120,14 +115,17 @@ const Header = () => {
             ) : (
                 <>
                     <div className={style.midSection}>
-                        <p onClick={handleLogoClick}> Home</p>
-                        <p onClick={handlePropertiesClick}>Properties</p>
-                        <p onClick={handleAboutClick}>About Us</p>
-                        <p onClick={handleContactClick}>Contact</p>
+                        {!isAuthenticated && (
+                            <>
+                                <p onClick={handleLogoClick}>Home</p>
+                                <p onClick={() => handleNavigation("/properties")}>Properties</p>
+                                <p onClick={() => handleNavigation("/about")}>About Us</p>
+                                <p onClick={() => handleNavigation("/contact")}>Contact</p>
+                            </>
+                        )}
                     </div>
 
                     <div className={style.btn}>
-                        <p className={style.loginBtn} onClick={handleDashboardClick}>Dashboard</p>
                         {isAuthenticated ? (
                             <p className={style.loginBtn} onClick={handleLogout}>Logout</p>
                         ) : (
