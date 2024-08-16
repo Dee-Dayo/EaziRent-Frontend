@@ -39,6 +39,7 @@ const Login = () => {
             if (response.data.status) {
                 const token = response.data.data.token;
                 Cookies.set('EasyRentAuthToken', token, { expires: 1 });
+                localStorage.setItem("email", response.data.data.email);
 
                 toast.success(`Welcome back, ${response.data.data.firstName.toUpperCase()}`, {
                     position: "top-right",

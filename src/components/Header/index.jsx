@@ -44,13 +44,14 @@ const Header = () => {
     };
     const handleLogout = async () => {
         try {
-            const token = localStorage.getItem("EasyRentAuthToken");
+            const token = Cookies.get("EasyRentAuthToken");
             const endpoint = "https://eazirent-latest.onrender.com/api/v1/auth/logout";
             const config = {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }};
             const response = await axios.post(endpoint, null, config);
+            console.log(response);
 
             if (response.status === 204) {
                 Cookies.remove("EasyRentAuthToken");
