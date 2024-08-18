@@ -45,7 +45,7 @@ const ApartmentDetails = () => {
 
     return (
         <div className="apartment-details-container">
-            <ToastContainer /> {/* Toastify container to show notifications */}
+            <ToastContainer />
             <div className="apartment-info">
                 <h1>Apartment {apartment.number}</h1>
                 <p>Price: {apartment.price} Naira</p>

@@ -51,7 +51,6 @@ const Login = () => {
                     progress: undefined,
                 });
                 resetForm();
-                console.log('User data being sent to Dashboard:', response.data.data);
                 localStorage.setItem("user_data", JSON.stringify(response.data.data));
                 setTimeout(() => {
                     navigate("/dashboard");
