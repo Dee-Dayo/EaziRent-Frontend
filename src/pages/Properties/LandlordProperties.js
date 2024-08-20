@@ -23,7 +23,7 @@ const LandlordProperties = () => {
                 console.log('Token:', token);
 
                 // Fetch properties using the email from the decoded token
-                const response = await axios.post('https://localhost:8080/api/v1/property/findByLandlord', email,{
+                const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/findByLandlord', email,{
                     headers:{
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
