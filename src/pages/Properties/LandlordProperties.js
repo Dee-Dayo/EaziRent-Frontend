@@ -3,6 +3,7 @@ import axios from 'axios';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import './AllProperties.css';
 import {jwtDecode} from "jwt-decode";
+import SearchComponent from "../../components/SearchComponent";
 
 const LandlordProperties = () => {
     const [properties, setProperties] = useState([]);
@@ -29,7 +30,7 @@ const LandlordProperties = () => {
                     email: email
                 });
 
-                setProperties(response.data.properties); // Adjust according to your API response structure
+                setProperties(response.data.data.properties); // Adjust according to your API response structure
             } catch (error) {
                 console.error('Error fetching properties:', error.message);
             } finally {
@@ -39,23 +40,26 @@ const LandlordProperties = () => {
 
         fetchProperties();
     }, []);
-
+    if (properties.length === 0) {
+        return <div>No properties found for this landlord.</div>;
+    }
 
     return (
         <div className="property-grid-container">
             <div className="location">
                 <h1>All Properties</h1>
+                <p>Properties</p>
             </div>
+
+            <SearchComponent/>
+
             <div className="property-grid">
-                {properties.length > 0 ? (
-                    properties.map((property) => (
-                        <PropertyCard key={property.id} property={property}/>
-                    ))
-                ) : (
-                    <p>No properties found.</p>
-                )}
+                {properties.map((property) => (
+                    <PropertyCard key={property.id} property={property}/>
+                ))}
             </div>
         </div>
+
     );
 };
 
