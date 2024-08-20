@@ -44,7 +44,6 @@ const AddPropertyDialog = ({ open, onClose }) => {
 
             formData.append('email', email); // Add email to form data
             console.log(formData)
-            //eazirent-latest.onrender.com
             const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/add', formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,

@@ -6,12 +6,13 @@ import {jwtDecode} from "jwt-decode";
 
 const LandlordProperties = () => {
     const [properties, setProperties] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
 
 
     useEffect(() => {
         const fetchProperties = async () => {
+            setIsLoading(true);
             try {
 
                 const token = document.cookie.split('=')[1];
