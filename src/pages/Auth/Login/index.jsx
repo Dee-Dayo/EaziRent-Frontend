@@ -32,9 +32,10 @@ const Login = () => {
                 email: values.email,
                 password: values.password
             };
-
             const endpoint = "https://eazirent-latest.onrender.com/api/v1/auth/login";
+            //eazirent-latest.onrender.com
             const response = await axios.post(endpoint, payload);
+            console.log(response)
 
             if (response.data.status) {
                 const token = response.data.data.token;

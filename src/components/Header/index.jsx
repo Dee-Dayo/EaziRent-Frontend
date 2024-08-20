@@ -41,6 +41,7 @@ const Header = () => {
     const handleLogout = async () => {
         try {
             const token = Cookies.get("EasyRentAuthToken");
+            //eazirent-latest.onrender.com
             const endpoint = "https://eazirent-latest.onrender.com/api/v1/auth/logout";
             const config = {
                 headers: {

@@ -20,6 +20,7 @@ const PropertyDetails = () => {
     useEffect(() => {
         const fetchPropertyDetails = async () => {
             try {
+                //eazirent-latest.onrender.com
                 const response = await axios.get(`https://eazirent-latest.onrender.com/api/v1/property/findBy${id}`);
                 setProperty(response.data);
             } catch (error) {
@@ -59,6 +60,7 @@ const PropertyDetails = () => {
 
         try {
             //TODO: change url to deployed endpoint
+            //eazirent-latest.onrender.com
             const url = 'https://eazirent-latest.onrender.com/api/v1/renter/reviewProperty';
             const response = await axios.post(url, payload, config);
             console.log(response.data);
