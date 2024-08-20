@@ -47,12 +47,8 @@ const LandlordProperties = () => {
     return (
         <div className="property-grid-container">
             <div className="location">
-                <h1>All Properties</h1>
-                <p>Properties</p>
+                <h1>My Properties</h1>
             </div>
-
-            <SearchComponent/>
-
             <div className="property-grid">
                 {properties.map((property) => (
                     <PropertyCard key={property.id} property={property}/>
