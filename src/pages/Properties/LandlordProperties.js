@@ -3,7 +3,6 @@ import axios from 'axios';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import './AllProperties.css';
 import {jwtDecode} from "jwt-decode";
-import SearchComponent from "../../components/SearchComponent";
 
 const LandlordProperties = () => {
     const [properties, setProperties] = useState([]);
@@ -17,13 +16,8 @@ const LandlordProperties = () => {
             try {
 
                 const token = document.cookie.split('=')[1];
-                console.log('Token:', token);
                 const decodedToken = jwtDecode(token);
                 const email = decodedToken.principal;
-
-                console.log('Token:', token);
-                console.log(email);
-
 
                 // Fetch properties using the email from the decoded token
                 const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/findByLandlord', {
