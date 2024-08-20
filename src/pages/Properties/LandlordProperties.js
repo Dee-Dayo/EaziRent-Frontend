@@ -2,30 +2,37 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import './AllProperties.css';
-import FilledButton from "../../components/FilledButton";
 import {jwtDecode} from "jwt-decode";
 
 const LandlordProperties = () => {
     const [properties, setProperties] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+
+
 
     useEffect(() => {
         const fetchProperties = async () => {
+            setIsLoading(true);
             try {
-                // Decode the token from cookies
-                const token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
-                const decodedToken = jwtDecode(token);
-                const email = decodedToken.email; // Adjust as per your token payload
-                console.log(token)
 
-                // Fetch properties with email address
-                const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/findByLandlord', {
-                    email: email
+                const token = document.cookie.split('=')[1];
+                console.log('Token:', token);
+                const decodedToken = jwtDecode(token);
+                const email = decodedToken.principal;
+
+                console.log('Token:', token);
+
+                // Fetch properties using the email from the decoded token
+                const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/findByLandlord', email,{
+                    headers:{
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    }
                 });
 
-                setProperties(response.data.response.properties); // Adjust according to your API response structure
+                setProperties(response.data.properties); // Adjust according to your API response structure
             } catch (error) {
-                console.error('Error fetching properties:', error);
+                console.error('Error fetching properties:', error.message);
             } finally {
                 setIsLoading(false);
             }
@@ -34,17 +41,12 @@ const LandlordProperties = () => {
         fetchProperties();
     }, []);
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
 
     return (
         <div className="property-grid-container">
             <div className="location">
                 <h1>All Properties</h1>
             </div>
-            <FilledButton name={"Add Property"} onClick={"/"} whereTo={"/"}/>
-
             <div className="property-grid">
                 {properties.length > 0 ? (
                     properties.map((property) => (

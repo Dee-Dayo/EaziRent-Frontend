@@ -43,14 +43,14 @@ const AddPropertyDialog = ({ open, onClose }) => {
             const email = decodedToken.principal; // Adjust as per your token payload
 
             formData.append('email', email); // Add email to form data
-
+            console.log(formData)
             const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/add', formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',
                 }
             });
-
+            console.log(response)
             if (response.status === 201) {
                 toast.success("Property added successfully!", {
                     position: "top-right",
