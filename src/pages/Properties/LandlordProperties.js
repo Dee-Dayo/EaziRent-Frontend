@@ -21,13 +21,12 @@ const LandlordProperties = () => {
                 const email = decodedToken.principal;
 
                 console.log('Token:', token);
+                console.log(email);
+
 
                 // Fetch properties using the email from the decoded token
-                const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/findByLandlord', email,{
-                    headers:{
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    }
+                const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/findByLandlord', {
+                    email: email
                 });
 
                 setProperties(response.data.properties); // Adjust according to your API response structure
