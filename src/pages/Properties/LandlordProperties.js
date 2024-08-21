@@ -3,6 +3,7 @@ import axios from 'axios';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import './AllProperties.css';
 import {jwtDecode} from "jwt-decode";
+import LandlordPropertyCard from "./LandlordPropertyCard";
 
 const LandlordProperties = () => {
     const [properties, setProperties] = useState([]);
@@ -45,7 +46,7 @@ const LandlordProperties = () => {
             </div>
             <div className="property-grid">
                 {properties.map((property) => (
-                    <PropertyCard key={property.id} property={property}/>
+                    <LandlordPropertyCard key={property.id} property={property}/>
                 ))}
             </div>
         </div>
