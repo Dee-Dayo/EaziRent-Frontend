@@ -12,6 +12,8 @@ import Payment from "../pages/Payment/Payment";
 import Dashboard from "../pages/Dashboard";
 import AddApartment from "../pages/Apartment";
 import LandlordProperties from "../pages/Properties/LandlordProperties";
+import LandlordPropertyDetails from "../pages/Properties/LandlordPropertyDetails";
+import LandlordApartmentDetails from "../pages/Apartment/LandlordApartmentDetails";
 
 export const ROUTES = [
     {
@@ -65,6 +67,14 @@ export const ROUTES = [
             {
                 path: "/dashboard/properties",
                 element: <LandlordProperties/>
+            },
+            {
+                path: "/dashboard/property/:id/apartments/all",
+                element: <LandlordPropertyDetails/>
+            },
+            {
+                path: "/dashboard/apartments/:id",
+                element: <LandlordApartmentDetails/>
             }
         ]
     },
