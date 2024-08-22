@@ -36,7 +36,7 @@ const LandlordProperties = () => {
     }, []);
 
     if (properties.length === 0) {
-        return <div>No properties found for this landlord.</div>;
+        return <div><h2>No properties found for this landlord.</h2></div>;
     }
 
     return (
