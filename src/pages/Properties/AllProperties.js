@@ -14,6 +14,7 @@ const AllProperties = () => {
             try {
                 const response = await axios.get('https://eazirent-latest.onrender.com/api/v1/property/all');
                 const fetchedProperties = response.data.properties;
+                
 
                 // Reverse the order of properties
                 const reversedProperties = fetchedProperties.reverse();
