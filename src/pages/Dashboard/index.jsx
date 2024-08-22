@@ -24,7 +24,7 @@ const Dashboard = () => {
         setOpenDialog(false);
     };
 
-    const handlePropertyViewClick = () => {
+    const handlePropertiesClick = () => {
         navigate('/dashboard/properties');
     };
 
@@ -46,9 +46,7 @@ const Dashboard = () => {
             {user?.role === "LANDLORD" && (
                 <div className="add-property">
                     <FilledButton name="Add Property" onClick={handleAddPropertyClick} />
-                    <FilledButton name="View Property" onClick={handlePropertyViewClick}/>
                 </div>
-
             )}
 
             <AddPropertyDialog open={openDialog} onClose={handleCloseDialog} />

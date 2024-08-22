@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import style from "../../../components/PageTemplate/index.module.css";
 import {toast, ToastContainer} from "react-toastify";
+
 import {Field, Form, Formik} from "formik";
 import {Icon} from "@iconify/react";
 import loadingLoop from "@iconify/icons-line-md/loading-loop";
@@ -50,8 +51,7 @@ const SignUp = () => {
                 role: values.role.toUpperCase() === 'RENTER' ? 'RENTER' : 'LANDLORD'
             };
 
-            const endpoint = values.role === 'renter' ? "http://localhost:8080/api/v1/renter/register" : "http://localhost:8080/api/v1/landlord/register";
-            //eazirent-latest.onrender.com
+            const endpoint = values.role === 'renter' ? "https://eazirent-latest.onrender.com/api/v1/renter/register" : "https://eazirent-latest.onrender.com/api/v1/landlord/register";
             const response = await axios.post(endpoint, payload);
             if (response.data.status) {
                 toast.success(`Hi ${values.firstName}, Welcome to EaziRent`, {

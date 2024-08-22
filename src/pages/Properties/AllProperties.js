@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
+import Spinner from '../../components/Spinner/Spinner'; // Import the Spinner
 import './AllProperties.css';
 import SearchComponent from "../../components/SearchComponent";
 
 const AllProperties = () => {
     const [properties, setProperties] = useState([]);
+    const [loading, setLoading] = useState(true); // Add loading state
 
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                //
                 const response = await axios.get('https://eazirent-latest.onrender.com/api/v1/property/all');
                 const fetchedProperties = response.data.properties;
 
@@ -20,14 +21,16 @@ const AllProperties = () => {
                 setProperties(reversedProperties);
             } catch (error) {
                 console.error('Error fetching properties:', error);
+            } finally {
+                setLoading(false); // Set loading to false after data is fetched
             }
         };
 
         fetchProperties();
     }, []);
 
-    if (!properties.length) {
-        return <div>Loading...</div>;
+    if (loading) { // Show the Spinner while loading
+        return <Spinner />;
     }
 
     return (
