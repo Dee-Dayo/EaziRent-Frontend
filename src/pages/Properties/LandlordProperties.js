@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import './AllProperties.css';
-import FilledButton from "../../components/FilledButton";
 import {jwtDecode} from "jwt-decode";
 import LandlordPropertyCard from "./LandlordPropertyCard";
 import Spinner from "../../components/Spinner/Spinner";
@@ -17,15 +15,16 @@ const LandlordProperties = () => {
 
                 const token = document.cookie.split('=')[1];
                 const decodedToken = jwtDecode(token);
-                const email = decodedToken.email; // Adjust as per your token payload
-                console.log(token)
+                const email = decodedToken.principal; // Adjust as per your token payload
 
                 // Fetch properties using the email from the decoded token
                 const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/findByLandlord', {
                     email: email
                 });
+                console.log(response)
 
-                setProperties(response.data.properties); // Adjust according to your API response structure
+                setProperties(response.data.data.properties); // Adjust according to your API response structure
+                console.log(properties)
             } catch (error) {
                 console.error('Error fetching properties:', error);
             } finally {
