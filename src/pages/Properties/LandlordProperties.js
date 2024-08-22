@@ -5,10 +5,11 @@ import './AllProperties.css';
 import FilledButton from "../../components/FilledButton";
 import {jwtDecode} from "jwt-decode";
 import LandlordPropertyCard from "./LandlordPropertyCard";
+import Spinner from "../../components/Spinner/Spinner";
 
 const LandlordProperties = () => {
     const [properties, setProperties] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchProperties = async () => {
@@ -28,17 +29,16 @@ const LandlordProperties = () => {
             } catch (error) {
                 console.error('Error fetching properties:', error);
             } finally {
-                setIsLoading(false);
+                setLoading(false);
             }
         };
 
         fetchProperties();
     }, []);
 
-    if (properties.length === 0) {
-        return <div><h2>No properties found for this landlord.</h2>git </div>;
+    if (loading) { // Show the Spinner while loading
+        return <Spinner />;
     }
-
     return (
         <div className="property-grid-container">
             <div className="location">
