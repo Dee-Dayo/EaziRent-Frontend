@@ -25,7 +25,7 @@ const LandlordProperties = () => {
                     email: email
                 });
 
-                setProperties(response.data.data.properties); // Adjust according to your API response structure
+                setProperties(response.data.properties); // Adjust according to your API response structure
             } catch (error) {
                 console.error('Error fetching properties:', error);
             } finally {
@@ -37,15 +37,13 @@ const LandlordProperties = () => {
     }, []);
 
     if (loading) { // Show the Spinner while loading
-        return <Spinner />;
+        return <Spinner/>;
     }
     return (
         <div className="property-grid-container">
             <div className="location">
                 <h1>My Properties</h1>
             </div>
-            <FilledButton name={"Add Property"} onClick={"/"} whereTo={"/"}/>
-
             <div className="property-grid">
                 {properties.map((property) => (
                     <LandlordPropertyCard key={property.id} property={property}/>
