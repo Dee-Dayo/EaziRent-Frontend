@@ -69,11 +69,11 @@ export const ROUTES = [
                 element: <LandlordProperties/>
             },
             {
-                path: "/dashboard/property/:id/apartments/all",
+                path: "/dashboard/property/:id",
                 element: <LandlordPropertyDetails/>
             },
             {
-                path: "/dashboard/apartments/:id",
+                path: "/dashboard/apartment/:id",
                 element: <LandlordApartmentDetails/>
             }
         ]

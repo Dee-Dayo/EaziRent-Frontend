@@ -15,16 +15,13 @@ const LandlordProperties = () => {
 
                 const token = document.cookie.split('=')[1];
                 const decodedToken = jwtDecode(token);
-                const email = decodedToken.principal; // Adjust as per your token payload
+                const email = decodedToken.principal;
 
-                // Fetch properties using the email from the decoded token
                 const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/findByLandlord', {
                     email: email
                 });
-                console.log(response)
 
-                setProperties(response.data.data.properties); // Adjust according to your API response structure
-                console.log(properties)
+                setProperties(response.data.data.properties);
             } catch (error) {
                 console.error('Error fetching properties:', error);
             } finally {
@@ -35,7 +32,7 @@ const LandlordProperties = () => {
         fetchProperties();
     }, []);
 
-    if (loading) { // Show the Spinner while loading
+    if (loading) {
         return <Spinner/>;
     }
     return (
