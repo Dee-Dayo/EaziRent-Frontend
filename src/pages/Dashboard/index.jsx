@@ -5,12 +5,14 @@ import './index,module.css';
 import defaultProfileImage from '../../assets/landlord.png';
 import AddPropertyDialog from '../../pages/AddPropertyDialog';
 import FilledButton from "../../components/FilledButton";
+import AddAccountDialog from "../AddAccountDialog/AddAccountDialog";
 
 const Dashboard = () => {
     const navigate = useNavigate();
     const user_data = localStorage.getItem('user_data');
     const user = JSON.parse(user_data) || {};
     const [openDialog, setOpenDialog] = useState(false);
+    const [openAccountDialog, setOpenAccountDialog] = useState(false);
 
     const profileImage = user?.mediaUrl && user.mediaUrl !== "default"
         ? user.mediaUrl
@@ -26,6 +28,14 @@ const Dashboard = () => {
 
     const handlePropertiesClick = () => {
         navigate('/dashboard/properties');
+    };
+
+    const handleAddAccountClick = () => {
+        setOpenAccountDialog(true);
+    };
+
+    const handleCloseAccountDialog = () => {
+        setOpenAccountDialog(false);
     };
 
     return (
@@ -47,10 +57,12 @@ const Dashboard = () => {
                 <div className="add-property">
                     <FilledButton name="Add Property" onClick={handleAddPropertyClick} />
                     <FilledButton name="View properties" onClick={handlePropertiesClick}/>
+                    <FilledButton name="Add Account" onClick={handleAddAccountClick} />
                 </div>
             )}
 
             <AddPropertyDialog open={openDialog} onClose={handleCloseDialog} />
+            <AddAccountDialog open={openAccountDialog} onClose={handleCloseAccountDialog} />
         </div>
     );
 };
