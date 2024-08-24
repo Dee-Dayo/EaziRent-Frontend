@@ -11,13 +11,14 @@ import style from "./index.module.css";
 const AddAccountDialog = ({ open, onClose }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [bankList, setBankList] = useState([]);
+    const [accountNumber, setAccountNumber] = useState('');
 
     // Fetch bank list when the component mounts
     useEffect(() => {
         const fetchBanks = async () => {
             try {
                 const response = await axios.get('https://eazirent-latest.onrender.com/api/v1/paystack/banks');
-                setBankList(response.data); // Adjust according to the API response structure
+                setBankList(response.data.data); // Adjust according to the API response structure
             } catch (error) {
                 console.error('Error fetching banks:', error);
             }
@@ -25,6 +26,27 @@ const AddAccountDialog = ({ open, onClose }) => {
 
         fetchBanks();
     }, []);
+
+    const fetchAssociatedBanks = async (accountNumber) => {
+        try {
+            // Call your API to get the bank details based on the account number
+            const response = await axios.get(`https://your-api-endpoint.com/resolve-bank?account_number=${accountNumber}`);
+            // Update your bankList based on the response
+            setBankList(response.data.data);
+        } catch (error) {
+            console.error('Error fetching associated banks:', error);
+        }
+    };
+
+    const handleAccountNumberChange = (e, setFieldValue) => {
+        const { value } = e.target;
+        setAccountNumber(value);
+        setFieldValue("accountNumber", value);
+        // Fetch associated banks when account number changes
+        if (value.length >= 10) { // Adjust length as needed
+            fetchAssociatedBanks(value);
+        }
+    };
 
     const validationSchema = Yup.object().shape({
         accountNumber: Yup.string().required('Account number is required'),
@@ -83,7 +105,7 @@ const AddAccountDialog = ({ open, onClose }) => {
                 validationSchema={validationSchema}
                 onSubmit={handleAddAccountDetails}
             >
-                {({ values, errors, touched, handleChange, handleBlur }) => (
+                {({ values, errors, touched, handleChange, handleBlur, setFieldValue }) => (
                     <Form>
                         <div>
                             <Field
@@ -92,7 +114,7 @@ const AddAccountDialog = ({ open, onClose }) => {
                                 name="accountNumber"
                                 placeholder="Enter account number"
                                 value={values.accountNumber}
-                                onChange={handleChange}
+                                onChange={(e) => handleAccountNumberChange(e, setFieldValue)}
                                 onBlur={handleBlur}
                                 style={{ borderColor: errors.accountNumber && touched.accountNumber ? 'darkred' : 'inherit' }}
                             />
