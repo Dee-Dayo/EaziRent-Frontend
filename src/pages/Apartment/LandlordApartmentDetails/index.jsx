@@ -3,15 +3,20 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import StarRating from "../../../components/StarRating";
 import FilledButton from "../../../components/FilledButton";
+import  style from './index.module.css'
+import AddApartmentImageDialog from "../AddApartmentImageDialog";
 
 const LandlordApartmentDetails = ()=>{
     const {id} = useParams();
     const[apartment, setApartment] = useState(null);
+    const [openDialog, setOpenDialog] = useState(false);
 
-    const handleCloseDialogue = () =>{
-
+    const handleApartmentDialog = () =>{
+        setOpenDialog(true);
     }
-
+    const handleCloseDialog = () =>{
+        setOpenDialog(false);
+    }
     useEffect(() => {
         const fetchApartmentDetails = async ()=>{
             try{
@@ -28,17 +33,17 @@ const LandlordApartmentDetails = ()=>{
         return <div>No apartments</div>
     }
     return (
-        <div>
-            <div className="property-apartments">
+        <>
+            <div className={style.property_apartments}>
                 <h1>Apartment {apartment.number}</h1>
                 <p>Price: {apartment.price} Naira</p>
                 <StarRating rating={apartment.ratings}/>
                 <p>Type: {apartment.rentType}</p>
                 <p>Subtype: {apartment.subType}</p>
                 <p>Available: {apartment.isAvailable ? "Yes" : "No"}</p>
-                <FilledButton onClick={handleCloseDialogue} name="Edit Apartment"/>
+                <FilledButton onClick={handleApartmentDialog} name="Add more pictures"/>
             </div>
-            <div className="apartment-images">
+            <div className={style.apartment_images}>
                 {apartment.mediaUrls.map((url, index) => (
                     <img
                         key={index}
@@ -47,8 +52,15 @@ const LandlordApartmentDetails = ()=>{
                         className="apartment-image"
                     />
                 ))}
+                {openDialog && (
+                    <AddApartmentImageDialog
+                        open={openDialog}
+                        onClose={handleCloseDialog}
+                    />
+                )}
             </div>
-        </div>
+
+        </>
     )
 
 }

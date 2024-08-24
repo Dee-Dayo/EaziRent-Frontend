@@ -35,8 +35,6 @@ const AddApartmentDialogue = ({open, onClose}) => {
         try {
             const token = document.cookie.split('=')[1];
             formData.append('propertyId', id);
-            console.log(id)
-            console.log(token)
             const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/apartment/add', formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
