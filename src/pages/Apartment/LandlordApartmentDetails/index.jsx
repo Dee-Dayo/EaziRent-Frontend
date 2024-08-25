@@ -56,6 +56,7 @@ const LandlordApartmentDetails = ()=>{
                     <AddApartmentImageDialog
                         open={openDialog}
                         onClose={handleCloseDialog}
+                        apartmentId={id}
                     />
                 )}
             </div>
