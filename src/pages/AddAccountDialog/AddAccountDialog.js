@@ -17,7 +17,7 @@ const AddAccountDialog = ({ open, onClose }) => {
         const fetchBanks = async () => {
             try {
                 const response = await axios.get('https://eazirent-latest.onrender.com/api/v1/paystack/banks');
-                setBankList(response.data); // Adjust according to the API response structure
+                setBankList(response.data.data); // Adjust according to the API response structure
             } catch (error) {
                 console.error('Error fetching banks:', error);
             }
