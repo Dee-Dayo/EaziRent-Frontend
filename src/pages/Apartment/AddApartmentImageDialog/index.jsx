@@ -5,28 +5,31 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import loadingLoop from "@iconify/icons-line-md/loading-loop";
 import { Icon } from "@iconify/react";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import style from "./index.module.css";
 
 const AddApartmentImageDialog = ({ open, onClose, apartmentId }) => {
     const [imageFiles, setImageFiles] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const token = document.cookie.split('=')[1];
+    const token = document.cookie.split("=")[1];
     const decodedToken = jwtDecode(token);
     const userEmail = decodedToken.principal;
 
-    const handleFileChange = async (e) => {
+    const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
         setImageFiles((prevFiles) => [...prevFiles, ...files]);
-
-        await uploadImages(files);
     };
 
-    const uploadImages = async (files) => {
+    const handleUpload = async () => {
+        if (imageFiles.length === 0) {
+            toast.warn("Please select at least one image to upload.");
+            return;
+        }
+
         setIsSubmitting(true);
         const formData = new FormData();
-        files.forEach((file) => formData.append("mediaFiles", file));
+        imageFiles.forEach((file) => formData.append("mediaFiles", file));
         formData.append("email", userEmail);
 
         try {
@@ -35,7 +38,7 @@ const AddApartmentImageDialog = ({ open, onClose, apartmentId }) => {
                 formData,
                 {
                     headers: {
-                        "Authorization": `Bearer ${token}`,
+                        Authorization: `Bearer ${token}`,
                         "Content-Type": "multipart/form-data",
                     },
                 }
@@ -43,6 +46,7 @@ const AddApartmentImageDialog = ({ open, onClose, apartmentId }) => {
             console.log(response.data);
             toast.success("Images uploaded successfully!");
             setImageFiles([]); // Reset state after upload
+            onClose(); // Close the dialog after successful upload
         } catch (error) {
             if (error.response && error.response.status === 403) {
                 toast.error("You are not authorized to upload images.");
@@ -71,15 +75,16 @@ const AddApartmentImageDialog = ({ open, onClose, apartmentId }) => {
                 accept="image/*"
                 multiple
                 onChange={handleFileChange}
+                disabled={isSubmitting}
             />
+            {isSubmitting && <Icon icon={loadingLoop} className={style.loadingIcon} />}
 
-            {isSubmitting && <Icon icon={loadingLoop} />}
             <div className={style.buttonGroup}>
                 <button
-                    onClick={onClose}
-                    disabled={isSubmitting}
+                    onClick={handleUpload}
+                    disabled={isSubmitting || imageFiles.length === 0}
                 >
-                    Done
+                    {isSubmitting ? "Uploading..." : "Upload"}
                 </button>
                 <button
                     onClick={onClose}
