@@ -48,6 +48,7 @@ const Header = () => {
                 },
             };
             const response = await axios.post(endpoint, null, config);
+            console.log(response)
 
             if (response.status === 204) {
                 Cookies.remove("EasyRentAuthToken");
