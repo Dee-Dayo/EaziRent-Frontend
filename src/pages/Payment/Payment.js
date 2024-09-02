@@ -50,7 +50,7 @@ const PaymentPage = () => {
                     if (paymentUrl) {
                         window.location.href = paymentUrl;
                     } else {
-                        toast.error('Failed to initialize payment. Please try again later.');
+                        toast.error('Payment URL could not be retrieved. Please try again later.');
                         setTimeout(() => {
                             navigate('/');
                         }, 3000);
@@ -59,7 +59,11 @@ const PaymentPage = () => {
                     toast.error('Failed to initialize payment. Please try again.');
                 }
             } catch (error) {
-                toast.error('Error initiating payment. Try again later.');
+                if (error.response && error.response.status === 403) {
+                    toast.error('You are not authorized to make this payment.');
+                } else {
+                    toast.error('Error initiating payment. Try again later.');
+                }
                 console.error('Error initiating payment:', error);
             } finally {
                 setIsLoading(false);
