@@ -40,6 +40,21 @@ const PropertyDetails = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const hasRated = Cookies.get(`rated_${property.id}`);
+        if (hasRated) {
+            toast.error('You have already rated this property.', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            return;
+        }
+
         setIsSubmitting(true);
         const payload = {
             propertyId: property.id,
@@ -47,9 +62,7 @@ const PropertyDetails = () => {
             comment: comment,
             email: localStorage.getItem("email")
         }
-        console.log(payload)
         const token = Cookies.get("EasyRentAuthToken");
-        console.log("token", token);
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -58,12 +71,13 @@ const PropertyDetails = () => {
         }
 
         try {
-            //TODO: change url to deployed endpoint
             const url = 'https://eazirent-latest.onrender.com/api/v1/renter/reviewProperty';
             const response = await axios.post(url, payload, config);
-            console.log(response.data);
+
             if (response.data.status) {
-                console.log("reached here");
+
+                Cookies.set(`rated_${property.id}`, true, { expires: 365 });
+
                 toast.success('Thanks. Your review has been submitted successfully!!!', {
                     position: "top-right",
                     autoClose: 5000,
