@@ -10,3 +10,9 @@
     justify-content: flex-start;
     flex-wrap: wrap;
 }
+
+.fileList{
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+}
