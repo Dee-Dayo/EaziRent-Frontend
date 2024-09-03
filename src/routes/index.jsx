@@ -53,7 +53,7 @@ export const ROUTES = [
                 element: <ApartmentLists/>
             },
             {
-                path: "/payment",
+                path: "/pay/:id",
                 element: <Payment/>
             },
             {

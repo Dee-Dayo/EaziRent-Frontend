@@ -35,7 +35,8 @@ const ApartmentDetails = () => {
                 navigate('/signup');
             }, 3000)
         } else {
-            navigate('/payment', { state: { apartmentId: id } });
+            navigate(`/pay/${id}`);
+            console.log(id)
         }
     };
 
