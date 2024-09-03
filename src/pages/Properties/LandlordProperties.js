@@ -15,11 +15,18 @@ const LandlordProperties = () => {
 
                 const token = document.cookie.split('=')[1];
                 const decodedToken = jwtDecode(token);
+                console.log("Token: ", token)
                 const email = decodedToken.principal;
 
                 const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/findByLandlord', {
                     email: email
-                });
+                },
+                    {
+                        headers:{
+                            'Authorization': `Bearer ${token}`,
+                        }
+                    }
+                );
 
                 setProperties(response.data.data.properties);
             } catch (error) {
