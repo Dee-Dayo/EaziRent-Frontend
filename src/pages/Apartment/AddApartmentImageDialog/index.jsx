@@ -12,33 +12,34 @@ const AddApartmentImageDialog = ({ open, onClose, apartmentId }) => {
     const [imageFiles, setImageFiles] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const token = document.cookie.split("=")[1];
+    const token = document.cookie.split('=')[1];
     const decodedToken = jwtDecode(token);
-    const userEmail = decodedToken.principal;
+    const userEmail = decodedToken.sub;
 
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
         setImageFiles((prevFiles) => [...prevFiles, ...files]);
     };
 
-    const handleUpload = async () => {
+    const handleDoneClick = async () => {
         if (imageFiles.length === 0) {
-            toast.warn("Please select at least one image to upload.");
+            toast.error("Please select images to upload.");
             return;
         }
 
         setIsSubmitting(true);
         const formData = new FormData();
         imageFiles.forEach((file) => formData.append("mediaFiles", file));
+        formData.append("id", apartmentId);
         formData.append("email", userEmail);
 
         try {
             const response = await axios.post(
-                `https://eazirent-latest.onrender.com/api/v1/apartment/upload-media/${apartmentId}`,
+                `https://eazirent-latest.onrender.com/api/v1/apartment/upload-media`,
                 formData,
                 {
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        "Authorization": `Bearer ${token}`,
                         "Content-Type": "multipart/form-data",
                     },
                 }
@@ -46,7 +47,7 @@ const AddApartmentImageDialog = ({ open, onClose, apartmentId }) => {
             console.log(response.data);
             toast.success("Images uploaded successfully!");
             setImageFiles([]); // Reset state after upload
-            onClose(); // Close the dialog after successful upload
+            onClose(); // Close the dialog
         } catch (error) {
             if (error.response && error.response.status === 403) {
                 toast.error("You are not authorized to upload images.");
@@ -75,16 +76,27 @@ const AddApartmentImageDialog = ({ open, onClose, apartmentId }) => {
                 accept="image/*"
                 multiple
                 onChange={handleFileChange}
-                disabled={isSubmitting}
             />
-            {isSubmitting && <Icon icon={loadingLoop} className={style.loadingIcon} />}
 
+            {imageFiles.length > 0 && (
+                <div>
+                    <div>
+                        {imageFiles.map((file, index) => (
+                            <div key={index} className={style.fileName}>
+                                <p>{file.name}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {isSubmitting && <Icon icon={loadingLoop} />}
             <div className={style.buttonGroup}>
                 <button
-                    onClick={handleUpload}
-                    disabled={isSubmitting || imageFiles.length === 0}
+                    onClick={handleDoneClick}
+                    disabled={isSubmitting}
                 >
-                    {isSubmitting ? "Uploading..." : "Upload"}
+                    Done
                 </button>
                 <button
                     onClick={onClose}
