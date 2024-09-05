@@ -15,7 +15,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className={style.footerCopyright}>
-                <p>Copyright © {year} Nexcent ltd. All rights reserved</p>
+                <p>Copyright © {year} EaziRent. All rights reserved</p>
                 <div className={style.icons}>
                     <img src={insta} alt="icon"/>
                     <img src={facebook} alt="icon"/>
