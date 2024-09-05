@@ -19,7 +19,6 @@ const AddApartmentDialogue = ({open, onClose}) => {
             'DOUBLE_SHARED_ROOM', 'QUAD_SHARED_ROOM','BOYS_QUARTERS', 'LOFT','MULTIPLE_ROOMS','TWO_BEDROOM_FLAT'])
             .required(),
         rentType: Yup.string().oneOf(['MONTHLY', 'YEARLY', 'HALF_YEARLY']).required(),
-        number: Yup.number().required(),
         mediaFile: Yup.mixed().required('An image is required'),
 
     });
@@ -30,7 +29,6 @@ const AddApartmentDialogue = ({open, onClose}) => {
         formData.append('type', values.type);
         formData.append('price', values.price);
         formData.append('rentType', values.rentType);
-        formData.append('number', values.number);
 
         try {
             const token = document.cookie.split('=')[1];
@@ -142,21 +140,6 @@ const AddApartmentDialogue = ({open, onClose}) => {
                                 </Field>
                                 {errors.rentType && touched.rentType &&
                                     <div className={style.error}>{errors.rentType}</div>}
-                            </div>
-
-                            <div>
-                                <Field
-                                    className={style.holder}
-                                    type="number"
-                                    name="number"
-                                    placeholder="Enter aparment number"
-                                    value={values.number}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    style={{borderColor: errors.number && touched.number ? 'darkred' : 'inherit'}}
-                                />
-                                {errors.number && touched.number &&
-                                    <div className={style.error}>{errors.number}</div>}
                             </div>
 
                             <div>

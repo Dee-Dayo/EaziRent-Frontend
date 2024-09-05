@@ -44,7 +44,6 @@ const AddApartmentImageDialog = ({ open, onClose, apartmentId }) => {
                     },
                 }
             );
-            console.log(response.data);
             toast.success("Images uploaded successfully!");
             setImageFiles([]); // Reset state after upload
             onClose(); // Close the dialog
