@@ -36,7 +36,6 @@ const ApartmentDetails = () => {
             }, 3000)
         } else {
             navigate(`/pay/${id}`);
-            console.log(id)
         }
     };
 

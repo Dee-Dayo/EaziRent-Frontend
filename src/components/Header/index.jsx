@@ -11,7 +11,7 @@ import logo from "../../assets/logo.png";
 const Header = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1080);
     const [isOpen, setIsOpen] = useState(false);
-    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+    const isAuthenticated = !!Cookies.get("EasyRentAuthToken");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -34,10 +34,7 @@ const Header = () => {
     };
 
     const handleLogoClick = () => handleNavigation("/home");
-    const handleLogin = () => {
-        localStorage.setItem("isAuthenticated", "true");
-        handleNavigation("/login");
-    };
+
     const handleLogout = async () => {
         try {
             const token = Cookies.get("EasyRentAuthToken");
@@ -48,31 +45,15 @@ const Header = () => {
                 },
             };
             const response = await axios.post(endpoint, null, config);
-            console.log(response)
 
             if (response.status === 204) {
                 Cookies.remove("EasyRentAuthToken");
-                localStorage.removeItem("isAuthenticated");
                 handleNavigation("/home");
             } else {
-                toast.error("An error occurred. Please try again later", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                });
+                toast.error("An error occurred. Please try again later");
             }
         } catch (error) {
-            toast.error("An error occurred. Please try again later", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
+            toast.error("An error occurred. Please try again later");
         }
     };
 
@@ -90,23 +71,18 @@ const Header = () => {
                     {isOpen && (
                         <div className={style.mobileMenu}>
                             <div className={style.midSection}>
-                                {!isAuthenticated && (
-                                    <>
-                                        <p onClick={() => handleNavigation("/home")}>Home</p>
-                                        <p onClick={() => handleNavigation("/properties")}>Properties</p>
-                                        <p onClick={() => handleNavigation("/about")}>About Us</p>
-                                        <p onClick={() => handleNavigation("/contact")}>Contact</p>
-                                    </>
-                                )}
+                                <p onClick={() => handleNavigation("/home")}>Home</p>
+                                <p onClick={() => handleNavigation("/properties")}>Properties</p>
+                                <p onClick={() => handleNavigation("/about")}>About Us</p>
+                                <p onClick={() => handleNavigation("/contact")}>Contact</p>
                             </div>
-
                             <div className={style.btn}>
                                 {isAuthenticated ? (
                                     <p className={style.loginBtn} onClick={handleLogout}>Logout</p>
                                 ) : (
                                     <>
-                                        <p className={style.loginBtn} onClick={handleLogin}>Login</p>
-                                        <FilledButton name={"Sign Up"} whereTo={"signup"} />
+                                        <p className={style.loginBtn} onClick={() => handleNavigation("/login")}>Login</p>
+                                        <FilledButton name={"Sign Up"} whereTo={"/signup"} />
                                     </>
                                 )}
                             </div>
@@ -116,22 +92,17 @@ const Header = () => {
             ) : (
                 <>
                     <div className={style.midSection}>
-                        {!isAuthenticated && (
-                            <>
-                                <p onClick={handleLogoClick}>Home</p>
-                                <p onClick={() => handleNavigation("/properties")}>Properties</p>
-                                <p onClick={() => handleNavigation("/about")}>About Us</p>
-                                <p onClick={() => handleNavigation("/contact")}>Contact</p>
-                            </>
-                        )}
+                        <p onClick={() => handleNavigation("/home")}>Home</p>
+                        <p onClick={() => handleNavigation("/properties")}>Properties</p>
+                        <p onClick={() => handleNavigation("/about")}>About Us</p>
+                        <p onClick={() => handleNavigation("/contact")}>Contact</p>
                     </div>
-
                     <div className={style.btn}>
                         {isAuthenticated ? (
                             <p className={style.loginBtn} onClick={handleLogout}>Logout</p>
                         ) : (
                             <>
-                                <p className={style.loginBtn} onClick={handleLogin}>Login</p>
+                                <p className={style.loginBtn} onClick={() => handleNavigation("/login")}>Login</p>
                                 <FilledButton name={"Sign Up"} whereTo={"/signup"} />
                             </>
                         )}

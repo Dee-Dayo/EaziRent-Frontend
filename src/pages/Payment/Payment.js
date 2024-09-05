@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Payment.css';
+import Spinner from "../../components/Spinner/Spinner";
 
 const PaymentPage = () => {
     const { id: apartmentId } = useParams();
@@ -61,6 +62,9 @@ const PaymentPage = () => {
             } catch (error) {
                 if (error.response && error.response.status === 403) {
                     toast.error('You are not authorized to make this payment.');
+                    setTimeout(() => {
+                        navigate(-1);
+                    }, 3000);
                 } else {
                     toast.error('Error initiating payment. Try again later.');
                 }
@@ -77,7 +81,11 @@ const PaymentPage = () => {
         <div className="payment-page-container">
             <ToastContainer />
             {isLoading ? (
-                <div className="loading">Loading...</div>
+                <div className="loading-container">
+                    <h1>Complete Your Payment</h1>
+                    <p>Please wait while we redirect you to the payment page.</p>
+                    <Spinner />
+                </div>
             ) : (
                 <>
                     <h1>Complete Your Payment</h1>
