@@ -36,11 +36,11 @@ const AddPropertyDialog = ({ open, onClose }) => {
         formData.append('addressRequest.lga', values.lga);
 
         try {
-            const token = document.cookie.split('=')[1]; // Adjust as needed
+            const token = document.cookie.split('=')[1];
             const decodedToken = jwtDecode(token);
-            const email = decodedToken.principal; // Adjust as per your token payload
+            const email = decodedToken.principal;
 
-            formData.append('email', email); // Add email to form data
+            formData.append('email', email);
 
             const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/add', formData, {
                 headers: {
