@@ -143,6 +143,21 @@ const AddApartmentDialogue = ({open, onClose}) => {
                             </div>
 
                             <div>
+                                <Field
+                                    className={style.holder}
+                                    type="number"
+                                    name="number"
+                                    placeholder="Enter aparment number"
+                                    value={values.number}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    style={{borderColor: errors.number && touched.number ? 'darkred' : 'inherit'}}
+                                />
+                                {errors.number && touched.number &&
+                                    <div className={style.error}>{errors.number}</div>}
+                            </div>
+
+                            <div>
                                 <input
                                     className={style.holder}
                                     name="mediaFile"
