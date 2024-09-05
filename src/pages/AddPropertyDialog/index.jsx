@@ -19,7 +19,6 @@ const AddPropertyDialog = ({ open, onClose }) => {
         area: Yup.string().required('Area is required'),
         state: Yup.string().oneOf(['LAGOS', 'ABUJA', 'DELTA'], 'Invalid state selected').required('State is required'),
         lga: Yup.string().required('LGA is required'),
-        noOfApartments: Yup.number().required('Number of apartments is required').min(1),
         type: Yup.string().required('Property type is required'),
         mediaFile: Yup.mixed().required('An image is required'),
     });
@@ -32,7 +31,6 @@ const AddPropertyDialog = ({ open, onClose }) => {
         formData.append('noOfApartments', values.noOfApartments);
         formData.append('type', values.type);
         formData.append('addressRequest.state', values.state);
-        formData.append('addressRequest.number', values.addressNumber);
         formData.append('addressRequest.street', values.street);
         formData.append('addressRequest.area', values.area);
         formData.append('addressRequest.lga', values.lga);
@@ -88,7 +86,6 @@ const AddPropertyDialog = ({ open, onClose }) => {
                     area: '',
                     state: '',
                     lga: '',
-                    noOfApartments: '',
                     type: '',
                     mediaFile: null,
                 }}
@@ -172,21 +169,6 @@ const AddPropertyDialog = ({ open, onClose }) => {
                             />
                             {errors.lga && touched.lga &&
                                 <div className={style.error}>{errors.lga}</div>}
-                        </div>
-
-                        <div>
-                            <Field
-                                className={style.holder}
-                                type="number"
-                                name="noOfApartments"
-                                placeholder="Number of Apartments"
-                                value={values.noOfApartments}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                style={{ borderColor: errors.noOfApartments && touched.noOfApartments ? 'darkred' : 'inherit' }}
-                            />
-                            {errors.noOfApartments && touched.noOfApartments &&
-                                <div className={style.error}>{errors.noOfApartments}</div>}
                         </div>
 
                         <div>
