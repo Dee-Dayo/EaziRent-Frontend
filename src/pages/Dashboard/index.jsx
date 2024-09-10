@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import StarRating from '../../components/StarRating';
 import './index,module.css';
 import defaultProfileImage from '../../assets/landlord.png';
@@ -13,10 +14,30 @@ const Dashboard = () => {
     const user = JSON.parse(user_data) || {};
     const [openDialog, setOpenDialog] = useState(false);
     const [openAccountDialog, setOpenAccountDialog] = useState(false);
-
+    const [renterDetails, setRenterDetails] = useState(null);
     const profileImage = user?.mediaUrl && user.mediaUrl !== "default"
         ? user.mediaUrl
         : defaultProfileImage;
+
+    useEffect(() => {
+        if (user?.role === "RENTER") {
+            fetchRenterDetails();
+        }
+    }, [user]);
+
+    const fetchRenterDetails = async () => {
+        try {
+            const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/renter/findByEmail', {
+                email: user.email,
+            });
+            console.log(response)
+            setRenterDetails(response.data);
+            console.log('Renter details:', response.data);
+            console.log('Renter details:', response.data);
+        } catch (error) {
+            console.error('Error fetching renter details:', error);
+        }
+    };
 
     const handleAddPropertyClick = () => {
         setOpenDialog(true);
@@ -53,10 +74,18 @@ const Dashboard = () => {
                 <p className="user-role">Role: {user?.role}</p>
             </div>
 
+            {/* Renter-specific buttons */}
+            {user?.role === "RENTER" && renterDetails && (
+                <div className="add-property">
+                    <FilledButton name="View Apartment" />
+                    <FilledButton name="View Landlord" />
+                </div>
+            )}
+
             {user?.role === "LANDLORD" && (
                 <div className="add-property">
                     <FilledButton name="Add Property" onClick={handleAddPropertyClick} />
-                    <FilledButton name="View properties" onClick={handlePropertiesClick}/>
+                    <FilledButton name="View properties" onClick={handlePropertiesClick} />
                     <FilledButton name="Add Account" onClick={handleAddAccountClick} />
                 </div>
             )}
@@ -67,4 +96,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default Dashboard; 

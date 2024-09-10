@@ -14,6 +14,7 @@ import AddApartment from "../pages/Apartment";
 import LandlordProperties from "../pages/Properties/LandlordProperties";
 import LandlordPropertyDetails from "../pages/Properties/LandlordPropertyDetails";
 import LandlordApartmentDetails from "../pages/Apartment/LandlordApartmentDetails";
+import VerifyPaymentPage from "../pages/PaymentVerification/PaymentVerification";
 
 export const ROUTES = [
     {
@@ -75,6 +76,10 @@ export const ROUTES = [
             {
                 path: "/dashboard/apartment/:id",
                 element: <LandlordApartmentDetails/>
+            },
+            {
+                path: "/verify-payment/:apartmentId",
+                element: <VerifyPaymentPage/>
             }
         ]
     },

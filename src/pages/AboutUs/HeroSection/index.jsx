@@ -4,7 +4,7 @@ const HeroSection = () => {
     return(
         <div className={style.container}>
             <div>
-                <img src={image1} alt={"image"}/>
+                <img src={image1} alt={"hero image"}/>
             </div>
 
             <div className={style.text_section}>

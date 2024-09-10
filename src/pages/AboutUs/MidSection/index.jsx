@@ -17,8 +17,8 @@ const MidSection = ()=>{
                 </div>
             </div>
             <div className={style.pic_section}>
-                <img className={style.first_image_section} src={image1} alt={""}/>
-                <img className={style.second_pic} src={image2} alt={""}/>
+                <img className={style.first_image_section} src={image1} alt={"house picture"}/>
+                <img className={style.second_pic} src={image2} alt={"2nd house picture"}/>
             </div>
         </div>
     )

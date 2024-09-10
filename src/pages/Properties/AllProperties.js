@@ -16,21 +16,20 @@ const AllProperties = () => {
                 const fetchedProperties = response.data.properties;
                 
 
-                // Reverse the order of properties
                 const reversedProperties = fetchedProperties.reverse();
 
                 setProperties(reversedProperties);
             } catch (error) {
                 console.error('Error fetching properties:', error);
             } finally {
-                setLoading(false); // Set loading to false after data is fetched
+                setLoading(false);
             }
         };
 
         fetchProperties();
     }, []);
 
-    if (loading) { // Show the Spinner while loading
+    if (loading) {
         return <Spinner />;
     }
 

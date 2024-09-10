@@ -45,8 +45,8 @@ const AddApartmentImageDialog = ({ open, onClose, apartmentId }) => {
                 }
             );
             toast.success("Images uploaded successfully!");
-            setImageFiles([]); // Reset state after upload
-            onClose(); // Close the dialog
+            setImageFiles([]);
+            onClose();
         } catch (error) {
             if (error.response && error.response.status === 403) {
                 toast.error("You are not authorized to upload images.");

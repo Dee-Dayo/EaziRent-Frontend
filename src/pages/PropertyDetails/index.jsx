@@ -22,6 +22,7 @@ const PropertyDetails = () => {
             try {
                 const response = await axios.get(`https://eazirent-latest.onrender.com/api/v1/property/findBy${id}`);
                 setProperty(response.data);
+                console.log(response)
             } catch (error) {
                 console.error('Error fetching property details:', error);
             }

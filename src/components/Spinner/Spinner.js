@@ -1,6 +1,6 @@
 import React from 'react';
-import { ClipLoader } from 'react-spinners'; // Import the ClipLoader
-import './Spinner.css'; // Import the CSS for styling
+import { ClipLoader } from 'react-spinners';
+import './Spinner.css';
 
 const Spinner = () => {
     return (
