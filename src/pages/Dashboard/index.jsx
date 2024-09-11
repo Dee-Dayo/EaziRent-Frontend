@@ -74,7 +74,6 @@ const Dashboard = () => {
                 <p className="user-role">Role: {user?.role}</p>
             </div>
 
-            {/* Renter-specific buttons */}
             {user?.role === "RENTER" && renterDetails && (
                 <div className="add-property">
                     <FilledButton name="View Apartment" />
