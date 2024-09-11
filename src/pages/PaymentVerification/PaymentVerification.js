@@ -44,12 +44,13 @@ const VerifyPaymentPage = () => {
                         },
                     }
                 );
+                console.log(response)
 
 
                 if (response.status === 201) {
                     toast.success('Payment successful!');
                     setTimeout(() => {
-                        navigate(`/apartments/${apartmentId}`);
+                        navigate(`/apartment/${apartmentId}`);
                     }, 3000);
                 } else {
                     toast.error('Payment verification failed.');
