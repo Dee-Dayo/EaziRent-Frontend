@@ -57,6 +57,9 @@ const Dashboard = () => {
     const handleCloseAccountDialog = () => {
         setOpenAccountDialog(false);
     };
+    const handleViewApartmentClick = () => {
+        navigate('/apartment-info', { state: { apartment: renterDetails?.data?.apartment } });
+    };
 
     return (
         <div className="dashboard-container">
@@ -75,7 +78,7 @@ const Dashboard = () => {
 
             {user?.role === "RENTER" && renterDetails && (
                 <div className="add-property">
-                    <FilledButton name="View Apartment" />
+                    <FilledButton name="View Apartment" onClick={handleViewApartmentClick} />
                     <FilledButton name="View Landlord" />
                 </div>
             )}

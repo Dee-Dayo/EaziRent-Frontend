@@ -1,12 +1,18 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import StarRating from '../../../components/StarRating';
 import '../../ApartmentDetails/ApartmentDetails.css';
 
-const ApartmentInfo = ({ apartment }) => {
+const ApartmentInfo = () => {
+    const location = useLocation();
+    const { apartment } = location.state || {};
+
     if (!apartment) {
-        return <div>
-            <h1>No apartment details available</h1>
-            </div>;
+        return (
+            <div>
+                <h1>No apartment details available</h1>
+            </div>
+        );
     }
 
     return (
