@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Spinner from '../../components/Spinner/Spinner';
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
+import '../Payment/Payment.css';
 
 const VerifyPaymentPage = () => {
     const { apartmentId } = useParams();
@@ -86,6 +87,7 @@ const VerifyPaymentPage = () => {
             ) : (
                 <div>
                     <h1>Payment Verification Complete</h1>
+                    <Spinner />
                 </div>
             )}
         </div>
