@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import ApartmentInfo from '../Renter/ApartmentInfo/ApartmentInfo';
 import StarRating from '../../components/StarRating';
 import './index,module.css';
 import defaultProfileImage from '../../assets/landlord.png';
@@ -15,6 +16,7 @@ const Dashboard = () => {
     const [openDialog, setOpenDialog] = useState(false);
     const [openAccountDialog, setOpenAccountDialog] = useState(false);
     const [renterDetails, setRenterDetails] = useState(null);
+    const [selectedApartment, setSelectedApartment] = useState(null);
     const profileImage = user?.mediaUrl && user.mediaUrl !== "default"
         ? user.mediaUrl
         : defaultProfileImage;
@@ -27,12 +29,10 @@ const Dashboard = () => {
 
     const fetchRenterDetails = async () => {
         try {
-            const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/renter/findByEmail', {
+            const response = await axios.post(' ', {
                 email: user.email,
             });
-            console.log(response)
             setRenterDetails(response.data);
-            console.log('Renter details:', response.data);
         } catch (error) {
             console.error('Error fetching renter details:', error);
         }
@@ -58,6 +58,12 @@ const Dashboard = () => {
         setOpenAccountDialog(false);
     };
 
+    const handleViewApartmentClick = () => {
+        if (renterDetails?.apartment) {
+            setSelectedApartment(renterDetails.apartment);
+        }
+    };
+
     return (
         <div className="dashboard-container">
             <div className="user-info">
@@ -75,7 +81,7 @@ const Dashboard = () => {
 
             {user?.role === "RENTER" && renterDetails && (
                 <div className="add-property">
-                    <FilledButton name="View Apartment" />
+                    <FilledButton name="View Apartment" onClick={handleViewApartmentClick} />
                     <FilledButton name="View Landlord" />
                 </div>
             )}
@@ -88,10 +94,12 @@ const Dashboard = () => {
                 </div>
             )}
 
+            {selectedApartment && <ApartmentInfo apartment={selectedApartment} />}
+
             <AddPropertyDialog open={openDialog} onClose={handleCloseDialog} />
             <AddAccountDialog open={openAccountDialog} onClose={handleCloseAccountDialog} />
         </div>
     );
 };
 
-export default Dashboard; 
+export default Dashboard;
