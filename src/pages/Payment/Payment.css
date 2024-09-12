@@ -1,6 +1,8 @@
 .payment-page-container {
     text-align: center;
     padding: 20px;
+    margin-top: 52px;
+    color: #000929;
 }
 
 .loading {
