@@ -23,7 +23,7 @@ const Dashboard = () => {
         if (user?.role === "RENTER") {
             fetchRenterDetails();
         }
-    }, [user]);
+    }, [user?.role, user?.email]);
 
     const fetchRenterDetails = async () => {
         try {
