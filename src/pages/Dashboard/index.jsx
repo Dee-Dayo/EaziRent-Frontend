@@ -27,7 +27,7 @@ const Dashboard = () => {
 
     const fetchRenterDetails = async () => {
         try {
-            const response = await axios.post(' ', {
+            const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/renter/findByEmail', {
                 email: user.email,
             });
             console.log(response)
