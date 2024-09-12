@@ -33,7 +33,6 @@ const Dashboard = () => {
             console.log(response)
             setRenterDetails(response.data);
             console.log('Renter details:', response.data);
-            console.log('Renter details:', response.data);
         } catch (error) {
             console.error('Error fetching renter details:', error);
         }

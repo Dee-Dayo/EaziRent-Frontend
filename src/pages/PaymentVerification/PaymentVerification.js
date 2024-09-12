@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Spinner from '../../components/Spinner/Spinner';
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
-import '../Payment/Payment.css';
+import './PaymentVerification.css';
 
 const VerifyPaymentPage = () => {
     const { apartmentId } = useParams();
@@ -51,7 +51,7 @@ const VerifyPaymentPage = () => {
                 if (response.status === 201) {
                     toast.success('Payment successful!');
                     setTimeout(() => {
-                        navigate(`/apartment/${apartmentId}`);
+                        navigate(`/dashboard`);
                     }, 3000);
                 } else {
                     toast.error('Payment verification failed.');

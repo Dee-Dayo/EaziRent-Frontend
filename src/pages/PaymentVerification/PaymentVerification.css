@@ -1,0 +1,19 @@
+.verify-payment-container {
+    text-align: center;
+    padding: 20px;
+    margin-top: 52px;
+    color: #000929;
+}
+
+.loading-container {
+    font-size: 18px;
+    color: #333;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 20px;
+}
