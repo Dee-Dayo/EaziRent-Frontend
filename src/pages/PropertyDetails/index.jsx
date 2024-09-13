@@ -11,6 +11,8 @@ import StarRatings from "../../components/StarRatings";
 import Cookies from "js-cookie";
 import API_BASE_URL from "../../apiConfig";
 import Modal from 'react-modal';
+import Spinner from "../../components/Spinner/Spinner";
+
 
 const PropertyDetails = () => {
     const { id } = useParams();
@@ -20,12 +22,14 @@ const PropertyDetails = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [reviews, setReviews] = useState([]);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchPropertyDetails = async () => {
             try {
                 const response = await axios.get(`${API_BASE_URL}/api/v1/property/findBy${id}`);
                 setProperty(response.data);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching property details:', error);
             }
@@ -36,9 +40,9 @@ const PropertyDetails = () => {
 
     const handleViewReviews = async () => {
         try {
-            const response = await axios.get(`${API_BASE_URL}/api/v1/renter/getPropertyReviews/${id}`);
-            console.log(response)
-            setReviews(response.data.data);
+            const response = await axios.get(`${API_BASE_URL}/api/v1/renter/getPropertyReviews${id}`);
+            const reviewsData = response.data.data.reviews;
+            setReviews(reviewsData);
             setIsDialogOpen(true);
         } catch (error) {
             console.error('Error fetching property reviews:', error);
@@ -81,6 +85,14 @@ const PropertyDetails = () => {
             email: localStorage.getItem("email")
         }
         const token = Cookies.get("EasyRentAuthToken");
+        if (!token) {
+            toast.error('User is not authenticated. Please log in.', {
+                position: 'top-right',
+                autoClose: 5000,
+            });
+            return;
+        }
+
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -90,6 +102,8 @@ const PropertyDetails = () => {
 
         try {
             const response = await axios.post(`${API_BASE_URL}/api/v1/renter/reviewProperty`, payload, config);
+            console.log(response)
+
             if (response.data.status) {
                 Cookies.set(`rated_${property.id}`, true, { expires: 365 });
                 toast.success('Thanks. Your review has been submitted successfully!!!', {
@@ -115,12 +129,35 @@ const PropertyDetails = () => {
         }
     };
 
+    const customModalStyles = {
+        overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            // zIndex: 1000, // Ensure it appears on top
+    },
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        width: '400px', // Set the width of the dialog box
+        padding: '20px',
+        borderRadius: '10px',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Slight shadow for the dialog
+    },
+};
+
     const closeModal = () => {
         setIsDialogOpen(false);
     };
 
+    if (loading) {
+        return <Spinner/>;
+    }
+
     if (!property) {
-        return <div>Loading...</div>;
+        return <Spinner/>;
     }
 
     return (
@@ -168,26 +205,29 @@ const PropertyDetails = () => {
                 <ToastContainer/>
 
                 <Modal
-                    isOpen={isDialogOpen}
-                    onRequestClose={closeModal}
-                    contentLabel="Property Reviews"
-                >
-                    <h2>Property Reviews</h2>
-                    <button onClick={closeModal}>Close</button>
-                    <ul>
-                        {reviews.length > 0 ? (
-                            reviews.map((review) => (
-                                <li key={review.id}>
-                                    <p>Rating: {review.rating}</p>
-                                    <p>Comment: {review.comment}</p>
-                                    <p>Reviewer: {review.reviewerName}</p>
-                                </li>
-                            ))
-                        ) : (
-                            <p>No reviews yet.</p>
-                        )}
-                    </ul>
-                </Modal>
+    isOpen={isDialogOpen}
+    onRequestClose={closeModal}
+    style={customModalStyles}
+    contentLabel="Property Reviews"
+>
+    <h2>Property Reviews</h2>
+    <button onClick={closeModal}>Close</button>
+    <ul>
+        {reviews.length > 0 ? (
+            reviews.map((review) => (
+                <li key={review.reviewId} style={{ marginBottom: '15px', padding: '10px', border: '1px solid #ddd' }}>
+                    <p><strong>Reviewer:</strong> {review.reviewerName}</p>
+                    <p><strong>Rating:</strong> {review.rating} / 5</p>
+                    <p><strong>Comment:</strong> {review.comment}</p>
+                    <p><strong>Review Date:</strong> {new Date(review.reviewDate).toLocaleDateString()}</p>
+                </li>
+            ))
+        ) : (
+            <p>No reviews yet.</p>
+        )}
+    </ul>
+</Modal>
+
             </div>
         </div>
     );

@@ -2,9 +2,9 @@
     display: flex;
     gap: 20px;
     max-width: 1200px;
-    margin: 0 auto;
     padding: 80px 20px 20px;
     box-sizing: border-box;
+    margin: 20px auto 0;
 }
 
 .landlord-info {
@@ -98,6 +98,8 @@
 .review-section button:disabled {
     background-color: #6c757d;
 }
+
+
 
 @media only screen and (max-width: 728px) {
     .property-details-container {
