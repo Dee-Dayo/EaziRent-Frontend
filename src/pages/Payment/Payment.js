@@ -6,6 +6,7 @@
     import 'react-toastify/dist/ReactToastify.css';
     import './Payment.css';
     import Spinner from "../../components/Spinner/Spinner";
+    import API_BASE_URL from "../../apiConfig";
 
     const PaymentPage = () => {
         const { id: apartmentId } = useParams();
@@ -31,7 +32,7 @@
 
                 try {
                     const response = await axios.post(
-                        'https://eazirent-latest.onrender.com/api/v1/paystack/pay',
+                        `${API_BASE_URL}/api/v1/paystack/pay`,
                         {},
                         {
                             headers: {
@@ -39,7 +40,7 @@
                             },
                             params: {
                                 apartmentId: apartmentId,
-                                callback_url: `https://eazi-rent-eight.vercel.app/verify-payment?apartmentId=${apartmentId}`
+                                callback_url: `${API_BASE_URL}/verify-payment?apartmentId=${apartmentId}`
                             },
                         }
                     );

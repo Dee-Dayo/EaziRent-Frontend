@@ -13,6 +13,7 @@ import {useNavigate} from "react-router-dom";
 import PageTemplate from "../../../components/PageTemplate";
 import image from "../../../assets/register.jpg";
 import Cookies from "js-cookie";
+import API_BASE_URL from "../../../apiConfig";
 
 const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -52,8 +53,8 @@ const SignUp = () => {
             };
 
             const endpoint = values.role === 'renter'
-                ? "https://eazirent-latest.onrender.com/api/v1/renter/register"
-                : "https://eazirent-latest.onrender.com/api/v1/landlord/register";
+                ? `${API_BASE_URL}/api/v1/renter/register`
+                : `${API_BASE_URL}/api/v1/landlord/register`;
             const response = await axios.post(endpoint, payload);
             if (response.data.status) {
                 toast.success(`Hi ${values.firstName}, Welcome to EaziRent`, {

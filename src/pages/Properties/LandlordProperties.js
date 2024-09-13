@@ -4,6 +4,7 @@ import './AllProperties.css';
 import {jwtDecode} from "jwt-decode";
 import LandlordPropertyCard from "./LandlordPropertyCard";
 import Spinner from "../../components/Spinner/Spinner";
+import API_BASE_URL from "../../apiConfig";
 
 const LandlordProperties = () => {
     const [properties, setProperties] = useState([]);
@@ -18,7 +19,7 @@ const LandlordProperties = () => {
                 console.log("Token: ", token)
                 const email = decodedToken.principal;
 
-                const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/findByLandlord', {
+                const response = await axios.post(`${API_BASE_URL}/api/v1/property/findByLandlord`, {
                     email: email
                 },
                     {

@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './ApartmentDetails.css';
+import API_BASE_URL from "../../apiConfig";
 
 const ApartmentDetails = () => {
     const { id } = useParams();
@@ -16,7 +17,7 @@ const ApartmentDetails = () => {
     useEffect(() => {
         const fetchApartmentDetails = async () => {
             try {
-                const response = await axios.get(`https://eazirent-latest.onrender.com/api/v1/apartment/findBy${id}`);
+                const response = await axios.get(`${API_BASE_URL}/api/v1/apartment/findBy${id}`);
                 setApartment(response.data.data);
             } catch (error) {
                 console.error('Error fetching apartment details:', error);

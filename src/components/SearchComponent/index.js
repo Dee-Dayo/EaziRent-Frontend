@@ -3,6 +3,7 @@ import styles from './index.module.css';
 import FilledButton from "../FilledButton";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from "../../apiConfig";
 
 const SearchComponent = () => {
     const [state, setState] = useState('');
@@ -13,7 +14,7 @@ const SearchComponent = () => {
 
     const handleSearch = async () => {
         try {
-            const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/apartment/filter', {
+            const response = await axios.post(`${API_BASE_URL}/api/v1/apartment/filter`, {
                 state,
                 type,
                 rentType

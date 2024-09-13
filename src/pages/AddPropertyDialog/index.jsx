@@ -9,6 +9,7 @@ import loadingLoop from "@iconify/icons-line-md/loading-loop";
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'react-modal';
 import { jwtDecode } from "jwt-decode";
+import API_BASE_URL from "../../apiConfig";
 
 const AddPropertyDialog = ({ open, onClose }) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +43,7 @@ const AddPropertyDialog = ({ open, onClose }) => {
 
             formData.append('email', email);
 
-            const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/property/add', formData, {
+            const response = await axios.post(`${API_BASE_URL}/api/v1/property/add`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',

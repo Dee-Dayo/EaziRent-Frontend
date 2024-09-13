@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PageTemplate from "../../../components/PageTemplate";
 import image from "../../../assets/login.jpg";
 import Cookies from 'js-cookie';
+import API_BASE_URL from "../../../apiConfig";
 
 const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +34,7 @@ const Login = () => {
                 password: values.password
             };
 
-            const endpoint = "https://eazirent-latest.onrender.com/api/v1/auth/login";
+            const endpoint = `${API_BASE_URL}/api/v1/auth/login`;
             const response = await axios.post(endpoint, payload);
 
             if (response.data.status) {

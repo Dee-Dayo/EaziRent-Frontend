@@ -7,6 +7,7 @@ import Hamburger from "hamburger-react";
 import FilledButton from "../FilledButton";
 import style from "./index.module.css";
 import logo from "../../assets/logo.png";
+import API_BASE_URL from "../../apiConfig";
 
 const Header = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1080);
@@ -38,7 +39,7 @@ const Header = () => {
     const handleLogout = async () => {
         try {
             const token = Cookies.get("EasyRentAuthToken");
-            const endpoint = "https://eazirent-latest.onrender.com/api/v1/auth/logout";
+            const endpoint = `${API_BASE_URL}/api/v1/auth/logout`;
             const config = {
                 headers: {
                     Authorization: `Bearer ${token}`,

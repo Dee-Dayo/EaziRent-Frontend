@@ -7,6 +7,7 @@ import defaultProfileImage from '../../assets/landlord.png';
 import AddPropertyDialog from '../../pages/AddPropertyDialog';
 import FilledButton from "../../components/FilledButton";
 import AddAccountDialog from "../AddAccountDialog/AddAccountDialog";
+import API_BASE_URL from "../../apiConfig";
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Dashboard = () => {
 
     const fetchRenterDetails = async () => {
         try {
-            const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/renter/findByEmail', {
+            const response = await axios.post(`${API_BASE_URL}/api/v1/renter/findByEmail`, {
                 email: user.email,
             });
             console.log(response)

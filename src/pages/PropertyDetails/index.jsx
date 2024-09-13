@@ -9,6 +9,7 @@ import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import StarRatings from "../../components/StarRatings";
 import Cookies from "js-cookie";
+import API_BASE_URL from "../../apiConfig";
 
 const PropertyDetails = () => {
     const { id } = useParams();
@@ -20,7 +21,7 @@ const PropertyDetails = () => {
     useEffect(() => {
         const fetchPropertyDetails = async () => {
             try {
-                const response = await axios.get(`https://eazirent-latest.onrender.com/api/v1/property/findBy${id}`);
+                const response = await axios.get(`${API_BASE_URL}/api/v1/property/findBy${id}`);
                 setProperty(response.data);
                 console.log(response)
             } catch (error) {
@@ -72,7 +73,7 @@ const PropertyDetails = () => {
         }
 
         try {
-            const url = 'https://eazirent-latest.onrender.com/api/v1/renter/reviewProperty';
+            const url = `${API_BASE_URL}/api/v1/renter/reviewProperty`;
             const response = await axios.post(url, payload, config);
 
             if (response.data.status) {

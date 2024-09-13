@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
-import Spinner from '../../components/Spinner/Spinner'; // Import the Spinner
+import Spinner from '../../components/Spinner/Spinner';
 import './AllProperties.css';
 import SearchComponent from "../../components/SearchComponent";
+import API_BASE_URL from "../../apiConfig";
 
 const AllProperties = () => {
     const [properties, setProperties] = useState([]);
@@ -12,7 +13,7 @@ const AllProperties = () => {
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                const response = await axios.get('https://eazirent-latest.onrender.com/api/v1/property/all');
+                const response = await axios.get(`${API_BASE_URL}/api/v1/property/all`);
                 const fetchedProperties = response.data.properties;
                 
 

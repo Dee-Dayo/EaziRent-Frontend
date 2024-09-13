@@ -7,6 +7,7 @@ import Spinner from '../../components/Spinner/Spinner';
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
 import './PaymentVerification.css';
+import API_BASE_URL from "../../apiConfig";
 
 const VerifyPaymentPage = () => {
     const { apartmentId } = useParams();
@@ -29,12 +30,8 @@ const VerifyPaymentPage = () => {
                 const decodedToken = jwtDecode(token);
                 const email = decodedToken.principal;
 
-                console.log(apartmentId)
-                console.log(email)
-                console.log(reference)
-
                 const response = await axios.post(
-                    `https://eazirent-latest.onrender.com/api/v1/paystack/verify/${reference}`,
+                    `${API_BASE_URL}/api/v1/paystack/verify/${reference}`,
                     null,
                     {
                         headers: {

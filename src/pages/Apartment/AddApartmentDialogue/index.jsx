@@ -8,6 +8,7 @@ import {Field, Form, Formik} from "formik";
 import {Icon} from "@iconify/react";
 import loadingLoop from "@iconify/icons-line-md/loading-loop";
 import {useParams} from "react-router-dom";
+import API_BASE_URL from "../../../apiConfig";
 
 const AddApartmentDialogue = ({open, onClose}) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +34,7 @@ const AddApartmentDialogue = ({open, onClose}) => {
         try {
             const token = document.cookie.split('=')[1];
             formData.append('propertyId', id);
-            const response = await axios.post('https://eazirent-latest.onrender.com/api/v1/apartment/add', formData, {
+            const response = await axios.post(`${API_BASE_URL}/api/v1/apartment/add`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',

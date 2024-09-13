@@ -5,6 +5,7 @@ import StarRating from "../../../components/StarRating";
 import FilledButton from "../../../components/FilledButton";
 import  style from './index.module.css'
 import AddApartmentImageDialog from "../AddApartmentImageDialog";
+import API_BASE_URL from "../../../apiConfig";
 
 const LandlordApartmentDetails = ()=>{
     const {id} = useParams();
@@ -20,7 +21,7 @@ const LandlordApartmentDetails = ()=>{
     useEffect(() => {
         const fetchApartmentDetails = async ()=>{
             try{
-                const response = await axios.get(`https://eazirent-latest.onrender.com/api/v1/apartment/findBy${id}`);
+                const response = await axios.get(`${API_BASE_URL}/api/v1/apartment/findBy${id}`);
                 setApartment(response.data.data);
             }
             catch(error) {

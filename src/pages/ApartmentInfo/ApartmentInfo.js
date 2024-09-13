@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import StarRating from '../../../components/StarRating';
-import '../../ApartmentDetails/ApartmentDetails.css';
+import StarRating from '../../components/StarRating';
+import '../ApartmentDetails/ApartmentDetails.css';
 
 const ApartmentInfo = () => {
     const location = useLocation();

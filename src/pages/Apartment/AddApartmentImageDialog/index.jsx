@@ -7,6 +7,7 @@ import loadingLoop from "@iconify/icons-line-md/loading-loop";
 import { Icon } from "@iconify/react";
 import {jwtDecode} from "jwt-decode";
 import style from "./index.module.css";
+import API_BASE_URL from "../../../apiConfig";
 
 const AddApartmentImageDialog = ({ open, onClose, apartmentId }) => {
     const [imageFiles, setImageFiles] = useState([]);
@@ -35,7 +36,7 @@ const AddApartmentImageDialog = ({ open, onClose, apartmentId }) => {
 
         try {
             const response = await axios.post(
-                `https://eazirent-latest.onrender.com/api/v1/apartment/upload-media`,
+                `${API_BASE_URL}/api/v1/apartment/upload-media`,
                 formData,
                 {
                     headers: {

@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 import { Icon } from "@iconify/react";
 import loadingLoop from "@iconify/icons-line-md/loading-loop";
 import style from "./index.module.css";
+import API_BASE_URL from "../../apiConfig";
 
 const AddAccountDialog = ({ open, onClose }) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +16,7 @@ const AddAccountDialog = ({ open, onClose }) => {
     useEffect(() => {
         const fetchBanks = async () => {
             try {
-                const response = await axios.get('https://eazirent-latest.onrender.com/api/v1/paystack/banks');
+                const response = await axios.get(`${API_BASE_URL}/api/v1/paystack/banks`);
                 setBankList(response.data.data);
             } catch (error) {
                 console.error('Error fetching banks:', error);
@@ -35,8 +36,8 @@ const AddAccountDialog = ({ open, onClose }) => {
         setIsLoading(true);
 
         try {
-            const token = document.cookie.split('=')[1]; // Adjust as needed
-            const response = await axios.post('https://eazirent-latest.onrender.com/add-account-details', values, {
+            const token = document.cookie.split('=')[1];
+            const response = await axios.post(`${API_BASE_URL}/add-account-details`, values, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ import LandlordProperties from "../pages/Properties/LandlordProperties";
 import LandlordPropertyDetails from "../pages/Properties/LandlordPropertyDetails";
 import LandlordApartmentDetails from "../pages/Apartment/LandlordApartmentDetails";
 import VerifyPaymentPage from "../pages/PaymentVerification/PaymentVerification";
-import ApartmentInfo from "../pages/Renter/ApartmentInfo/ApartmentInfo";
+import ApartmentInfo from "../pages/ApartmentInfo/ApartmentInfo";
 
 export const ROUTES = [
     {
