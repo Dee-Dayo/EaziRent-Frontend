@@ -85,6 +85,10 @@ export const ROUTES = [
             {
                 path: "/apartment-info",
                 element: <ApartmentInfo/>
+            },
+            {
+                path: "/landlord/:landlordId",
+                element: <LandlordPropertyDetails/>
             }
         ]
     },

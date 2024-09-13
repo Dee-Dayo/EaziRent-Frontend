@@ -8,6 +8,7 @@ import AddPropertyDialog from '../../pages/AddPropertyDialog';
 import FilledButton from "../../components/FilledButton";
 import AddAccountDialog from "../AddAccountDialog/AddAccountDialog";
 import API_BASE_URL from "../../apiConfig";
+import {toast} from "react-toastify";
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -62,6 +63,19 @@ const Dashboard = () => {
         navigate('/apartment-info', { state: { apartment: renterDetails?.data?.apartment } });
     };
 
+    const handleViewLandlordClick = () => {
+    const landlordId = renterDetails.data.landlordResponse.id;
+    if (landlordId) {
+        navigate(`/landlord/${landlordId}`);
+    } else {
+        toast.error("Landlord details not available", {
+            position: "top-right",
+            autoClose: 5000,
+        });
+    }
+    };
+
+
     return (
         <div className="dashboard-container">
             <div className="user-info">
@@ -80,7 +94,7 @@ const Dashboard = () => {
             {user?.role === "RENTER" && renterDetails && (
                 <div className="add-property">
                     <FilledButton name="View Apartment" onClick={handleViewApartmentClick} />
-                    <FilledButton name="View Landlord" />
+                    <FilledButton name="View Landlord" onClick={handleViewLandlordClick}/>
                 </div>
             )}
 

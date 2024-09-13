@@ -5,11 +5,12 @@ import ApartmentCard from '../../components/ApartmentCard';
 import defaultLandlordImage from '../../assets/landlord.png';
 import StarRating from '../../components/StarRating';
 import './PropertyDetails.css';
-import {toast, ToastContainer} from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import StarRatings from "../../components/StarRatings";
 import Cookies from "js-cookie";
 import API_BASE_URL from "../../apiConfig";
+import Modal from 'react-modal';
 
 const PropertyDetails = () => {
     const { id } = useParams();
@@ -17,13 +18,14 @@ const PropertyDetails = () => {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [reviews, setReviews] = useState([]);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     useEffect(() => {
         const fetchPropertyDetails = async () => {
             try {
                 const response = await axios.get(`${API_BASE_URL}/api/v1/property/findBy${id}`);
                 setProperty(response.data);
-                console.log(response)
             } catch (error) {
                 console.error('Error fetching property details:', error);
             }
@@ -31,6 +33,26 @@ const PropertyDetails = () => {
 
         fetchPropertyDetails();
     }, [id]);
+
+    const handleViewReviews = async () => {
+        try {
+            const response = await axios.get(`${API_BASE_URL}/api/v1/renter/getPropertyReviews/${id}`);
+            console.log(response)
+            setReviews(response.data.data);
+            setIsDialogOpen(true);
+        } catch (error) {
+            console.error('Error fetching property reviews:', error);
+            toast.error('Error fetching reviews.', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    };
 
     const handleRatingChange = (newRating) => {
         setRating(newRating);
@@ -42,17 +64,11 @@ const PropertyDetails = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         const hasRated = Cookies.get(`rated_${property.id}`);
         if (hasRated) {
             toast.error('You have already rated this property.', {
                 position: 'top-right',
                 autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
             });
             return;
         }
@@ -73,21 +89,12 @@ const PropertyDetails = () => {
         }
 
         try {
-            const url = `${API_BASE_URL}/api/v1/renter/reviewProperty`;
-            const response = await axios.post(url, payload, config);
-
+            const response = await axios.post(`${API_BASE_URL}/api/v1/renter/reviewProperty`, payload, config);
             if (response.data.status) {
-
                 Cookies.set(`rated_${property.id}`, true, { expires: 365 });
-
                 toast.success('Thanks. Your review has been submitted successfully!!!', {
                     position: "top-right",
                     autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
                 });
                 setRating(0);
                 setComment('');
@@ -95,65 +102,54 @@ const PropertyDetails = () => {
                 toast.error(response.data.message, {
                     position: "top-right",
                     autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                })
+                });
             }
         } catch (error) {
             console.error('Error submitting review:', error);
-            const message = error.response.data.data ? error.response.data.data
-                : error.response.data.message ? error.response.data.message : 'An error occurred';
-            toast.error('Error submitting review: ' + message, {
+            toast.error('Error submitting review: ' + error.response.data.message, {
                 position: 'top-right',
                 autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });        } finally {
+            });
+        } finally {
             setIsSubmitting(false);
         }
+    };
+
+    const closeModal = () => {
+        setIsDialogOpen(false);
     };
 
     if (!property) {
         return <div>Loading...</div>;
     }
 
-    const landlordName = property.landlordName || 'Landlord';
-    const landlordImage = property.landlordMediaUrl === 'default' ? defaultLandlordImage : property.landlordMediaUrl;
-
     return (
         <div className="property-details-container">
             <div className="landlord-info">
                 <img
-                    src={landlordImage}
-                    alt={landlordName}
+                    src={property.landlordMediaUrl === 'default' ? defaultLandlordImage : property.landlordMediaUrl}
+                    alt={property.landlordName || 'Landlord'}
                     className="landlord-image"
                 />
-                <h2 className="landlord-name">Owner: {landlordName}</h2>
-                <StarRating rating={property.landlordRating}/>
+                <h2 className="landlord-name">Owner: {property.landlordName || 'Landlord'}</h2>
+                <StarRating rating={property.landlordRating} />
                 <p className="agentName">Agent Name: {property.agentName}</p>
                 <p className="agentPhone">Agent Phone: {property.agentPhoneNumber}</p>
-
-                <img
-                    src={property.mediaUrl}
-                    alt={"property "+property.id}
-                />
             </div>
 
             <div className="property-apartments">
                 <div className="property-grid">
                     {property.apartments.map((apartment) => (
-                        <ApartmentCard key={apartment.id} apartment={apartment}/>
+                        <ApartmentCard key={apartment.id} apartment={apartment} />
                     ))}
                 </div>
             </div>
 
             <div className="review-section">
+                <button onClick={handleViewReviews}>
+                    View All Property Reviews
+                </button>
+
                 <h3>Leave a Review</h3>
                 <form onSubmit={handleSubmit}>
                     <StarRatings rating={rating} onRatingChange={handleRatingChange}/>
@@ -168,7 +164,30 @@ const PropertyDetails = () => {
                         {isSubmitting ? 'Submitting...' : 'Submit Review'}
                     </button>
                 </form>
-                <ToastContainer />
+
+                <ToastContainer/>
+
+                <Modal
+                    isOpen={isDialogOpen}
+                    onRequestClose={closeModal}
+                    contentLabel="Property Reviews"
+                >
+                    <h2>Property Reviews</h2>
+                    <button onClick={closeModal}>Close</button>
+                    <ul>
+                        {reviews.length > 0 ? (
+                            reviews.map((review) => (
+                                <li key={review.id}>
+                                    <p>Rating: {review.rating}</p>
+                                    <p>Comment: {review.comment}</p>
+                                    <p>Reviewer: {review.reviewerName}</p>
+                                </li>
+                            ))
+                        ) : (
+                            <p>No reviews yet.</p>
+                        )}
+                    </ul>
+                </Modal>
             </div>
         </div>
     );
