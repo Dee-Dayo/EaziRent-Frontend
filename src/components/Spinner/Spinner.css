@@ -6,7 +6,7 @@
 }
 
 .loading-logo {
-    width: 250px;
+    width: 200px;
     height: auto;
     animation: zoomInOut 1.5s ease-in-out infinite;
 }

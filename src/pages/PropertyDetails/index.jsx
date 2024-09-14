@@ -131,22 +131,23 @@ const PropertyDetails = () => {
 
     const customModalStyles = {
         overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.75)',
-            // zIndex: 1000, // Ensure it appears on top
-    },
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        width: '400px', // Set the width of the dialog box
-        padding: '20px',
-        borderRadius: '10px',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Slight shadow for the dialog
-    },
-};
+        backgroundColor: 'rgba(0, 0, 0, 0.75)',
+        },
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            width: '400px',
+            maxHeight: '80vh',
+            overflowY: 'auto',
+            padding: '20px',
+            borderRadius: '10px',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        },
+    };
 
     const closeModal = () => {
         setIsDialogOpen(false);
@@ -205,28 +206,28 @@ const PropertyDetails = () => {
                 <ToastContainer/>
 
                 <Modal
-    isOpen={isDialogOpen}
-    onRequestClose={closeModal}
-    style={customModalStyles}
-    contentLabel="Property Reviews"
->
-    <h2>Property Reviews</h2>
-    <button onClick={closeModal}>Close</button>
-    <ul>
-        {reviews.length > 0 ? (
-            reviews.map((review) => (
-                <li key={review.reviewId} style={{ marginBottom: '15px', padding: '10px', border: '1px solid #ddd' }}>
-                    <p><strong>Reviewer:</strong> {review.reviewerName}</p>
-                    <p><strong>Rating:</strong> {review.rating} / 5</p>
-                    <p><strong>Comment:</strong> {review.comment}</p>
-                    <p><strong>Review Date:</strong> {new Date(review.reviewDate).toLocaleDateString()}</p>
-                </li>
-            ))
-        ) : (
-            <p>No reviews yet.</p>
-        )}
-    </ul>
-</Modal>
+                    isOpen={isDialogOpen}
+                    onRequestClose={closeModal}
+                    style={customModalStyles}
+                    contentLabel="Property Reviews"
+                >
+                    <h2>Property Reviews</h2>
+                    <button onClick={closeModal}>Close</button>
+                    <ul>
+                        {reviews.length > 0 ? (
+                            reviews.map((review) => (
+                                <li key={review.reviewId} style={{ marginBottom: '15px', padding: '10px', border: '1px solid #ddd' }}>
+                                    <p><strong>Reviewer:</strong> {review.reviewerName}</p>
+                                    <div><strong>Rating:</strong> <StarRating rating={review.rating} /></div> {/* Replace fraction with stars */}
+                                    <p><strong>Comment:</strong> {review.comment}</p>
+                                    <p><strong>Review Date:</strong> {new Date(review.reviewDate).toLocaleDateString()}</p>
+                                </li>
+                            ))
+                        ) : (
+                            <p>No reviews yet.</p>
+                        )}
+                    </ul>
+                </Modal>
 
             </div>
         </div>
