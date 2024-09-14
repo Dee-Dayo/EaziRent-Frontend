@@ -1,11 +1,11 @@
 import React from 'react';
-import { ClipLoader } from 'react-spinners';
 import './Spinner.css';
+import logo from '../../assets/logo.png'
 
 const Spinner = () => {
     return (
         <div className="spinner-container">
-            <ClipLoader color={"#3498db"} loading={true} size={60} />
+            <img src={logo} alt="Loading..." className="loading-logo"/>
         </div>
     );
 };
