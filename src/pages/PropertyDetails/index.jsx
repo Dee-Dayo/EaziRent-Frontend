@@ -5,7 +5,7 @@ import ApartmentCard from '../../components/ApartmentCard';
 import defaultLandlordImage from '../../assets/landlord.png';
 import StarRating from '../../components/StarRating';
 import './PropertyDetails.css';
-import { toast, ToastContainer } from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import StarRatings from "../../components/StarRatings";
 import Cookies from "js-cookie";
@@ -92,6 +92,22 @@ const PropertyDetails = () => {
         const hasRated = Cookies.get(`rated_${property.id}`);
         if (hasRated) {
             toast.error('You have already rated this property.', {
+                position: 'top-right',
+                autoClose: 5000,
+            });
+            return;
+        }
+
+        if (rating === 0) {
+            toast.error('Please select a rating.', {
+                position: 'top-right',
+                autoClose: 5000,
+            });
+            return;
+        }
+
+        if (comment.trim() === '') {
+            toast.error('Please write a comment.', {
                 position: 'top-right',
                 autoClose: 5000,
             });

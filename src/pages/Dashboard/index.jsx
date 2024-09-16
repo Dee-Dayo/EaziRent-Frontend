@@ -64,15 +64,15 @@ const Dashboard = () => {
     };
 
     const handleViewLandlordClick = () => {
-    const landlordId = renterDetails.data.landlordResponse.id;
-    if (landlordId) {
-        navigate(`/landlord/${landlordId}`);
-    } else {
-        toast.error("Landlord details not available", {
-            position: "top-right",
-            autoClose: 5000,
-        });
-    }
+        const landlordData = {
+            landlordId: renterDetails?.data?.landlordResponse?.id,
+            renterId: renterDetails?.data?.id,
+            landlordName: renterDetails?.data?.landlordResponse?.firstName + " " + renterDetails?.data?.landlordResponse?.lastName,
+            landlordEmail: renterDetails?.data?.landlordResponse?.email,
+            landlordProfileImage: renterDetails?.data?.landlordResponse?.profilePictureUrl
+        };
+        navigate('/landlord-details', { state: landlordData });
+
     };
 
 
