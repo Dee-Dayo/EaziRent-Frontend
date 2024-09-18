@@ -8,11 +8,17 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './ApartmentDetails.css';
 import API_BASE_URL from "../../apiConfig";
+import StarRatings from "../../components/StarRatings";
+import Spinner from "../../components/Spinner/Spinner";
 
 const ApartmentDetails = () => {
     const { id } = useParams();
     const [apartment, setApartment] = useState(null);
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchApartmentDetails = async () => {
@@ -21,6 +27,8 @@ const ApartmentDetails = () => {
                 setApartment(response.data.data);
             } catch (error) {
                 console.error('Error fetching apartment details:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -34,14 +42,97 @@ const ApartmentDetails = () => {
             toast.warning('You need to be a registered user to rent an apartment.');
             setTimeout(() => {
                 navigate('/signup');
-            }, 3000)
+            }, 3000);
         } else {
             navigate(`/pay/${id}`);
         }
     };
 
+    const handleRatingChange = (newRating) => {
+        setRating(newRating);
+    };
+
+    const handleCommentChange = (event) => {
+        setComment(event.target.value);
+    };
+
+    const handleSubmitReview = async (event) => {
+        event.preventDefault();
+        const token = Cookies.get("EasyRentAuthToken");
+
+        if (!token) {
+            toast.error('User is not authenticated. Please log in.', {
+                position: 'top-right',
+                autoClose: 5000,
+            });
+            return;
+        }
+
+        if (rating === 0) {
+            toast.error('Please select a rating.', {
+                position: 'top-right',
+                autoClose: 5000,
+            });
+            return;
+        }
+
+        if (comment.trim() === '') {
+            toast.error('Please write a comment.', {
+                position: 'top-right',
+                autoClose: 5000,
+            });
+            return;
+        }
+
+        setIsSubmitting(true);
+        const payload = {
+            propertyId: apartment.propertyId,
+            apartmentId: apartment.id,
+            email: localStorage.getItem("email"),
+            rating: rating,
+            comment: comment,
+        };
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        };
+
+        try {
+            const response = await axios.post(`${API_BASE_URL}/api/v1/apartment/review`, payload, config);
+            console.log(response)
+            if (response.data.status) {
+                toast.success('Thanks. Your review has been submitted successfully!', {
+                    position: 'top-right',
+                    autoClose: 5000,
+                });
+                setRating(0);
+                setComment('');
+            } else {
+                toast.error(response.data.message, {
+                    position: 'top-right',
+                    autoClose: 5000,
+                });
+            }
+        } catch (error) {
+            console.error('Error submitting review:', error);
+            toast.error('Error submitting review: ' + error.response.data.message, {
+                position: 'top-right',
+                autoClose: 5000,
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+     if (loading) {
+        return <Spinner />;
+    }
+
     if (!apartment) {
-        return <div>Loading...</div>;
+        return <div>No apartment details available.</div>;
     }
 
     return (
@@ -65,6 +156,23 @@ const ApartmentDetails = () => {
                         className="apartment-image"
                     />
                 ))}
+            </div>
+
+            <div className="review-section">
+                <h3>Leave a Review</h3>
+                <form onSubmit={handleSubmitReview}>
+                    <StarRatings rating={rating} onRatingChange={handleRatingChange} />
+                    <textarea
+                        value={comment}
+                        onChange={handleCommentChange}
+                        placeholder="Write your comment here..."
+                        rows="4"
+                        cols="50"
+                    />
+                    <button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? 'Submitting...' : 'Submit Review'}
+                    </button>
+                </form>
             </div>
         </div>
     );

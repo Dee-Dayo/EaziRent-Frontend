@@ -8,7 +8,6 @@ import AddPropertyDialog from '../../pages/AddPropertyDialog';
 import FilledButton from "../../components/FilledButton";
 import AddAccountDialog from "../AddAccountDialog/AddAccountDialog";
 import API_BASE_URL from "../../apiConfig";
-import {toast} from "react-toastify";
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -32,9 +31,7 @@ const Dashboard = () => {
             const response = await axios.post(`${API_BASE_URL}/api/v1/renter/findByEmail`, {
                 email: user.email,
             });
-            console.log(response)
             setRenterDetails(response.data);
-            console.log('Renter details:', response.data);
         } catch (error) {
             console.error('Error fetching renter details:', error);
         }
@@ -49,6 +46,7 @@ const Dashboard = () => {
     };
 
     const handlePropertiesClick = () => {
+                    console.log('user is: ', user)
         navigate('/dashboard/properties');
     };
 
