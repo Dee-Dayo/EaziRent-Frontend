@@ -11,6 +11,15 @@ import API_BASE_URL from "../../apiConfig";
 import StarRatings from "../../components/StarRatings";
 import Spinner from "../../components/Spinner/Spinner";
 
+const formatString = (str) => {
+    if (!str) return '';
+    return str
+        .toLowerCase()
+        .split('_')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+};
+
 const ApartmentDetails = () => {
     const { id } = useParams();
     const [apartment, setApartment] = useState(null);
@@ -25,6 +34,7 @@ const ApartmentDetails = () => {
             try {
                 const response = await axios.get(`${API_BASE_URL}/api/v1/apartment/findBy${id}`);
                 setApartment(response.data.data);
+                console.log(response.data.data);
             } catch (error) {
                 console.error('Error fetching apartment details:', error);
             } finally {
@@ -102,7 +112,6 @@ const ApartmentDetails = () => {
 
         try {
             const response = await axios.post(`${API_BASE_URL}/api/v1/apartment/review`, payload, config);
-            console.log(response)
             if (response.data.status) {
                 toast.success('Thanks. Your review has been submitted successfully!', {
                     position: 'top-right',
@@ -127,7 +136,7 @@ const ApartmentDetails = () => {
         }
     };
 
-     if (loading) {
+    if (loading) {
         return <Spinner />;
     }
 
@@ -140,11 +149,11 @@ const ApartmentDetails = () => {
             <ToastContainer />
             <div className="apartment-info">
                 <h1>Apartment {apartment.number}</h1>
-                <p>Price: {apartment.price} Naira</p>
+                <p><strong>Price: </strong>{apartment.price} Naira</p>
                 <StarRating rating={apartment.ratings} />
-                <p>Type: {apartment.rentType}</p>
-                <p>Subtype: {apartment.subType}</p>
-                <p>Available: {apartment.isAvailable ? "Yes" : "No"}</p>
+                <p><strong>Type: </strong> {formatString(apartment.rentType)}</p>
+                <p><strong>Subtype: </strong> {formatString(apartment.subType)}</p>
+                <p><strong>Available: </strong> {apartment.isAvailable ? "Yes" : "No"}</p>
                 <FilledButton name={'Rent Apartment'} onClick={handlePaymentClick} />
             </div>
             <div className="apartment-images">

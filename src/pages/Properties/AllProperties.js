@@ -8,7 +8,7 @@ import API_BASE_URL from "../../apiConfig";
 
 const AllProperties = () => {
     const [properties, setProperties] = useState([]);
-    const [loading, setLoading] = useState(true); // Add loading state
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchProperties = async () => {
