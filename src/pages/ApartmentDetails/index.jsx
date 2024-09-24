@@ -34,7 +34,6 @@ const ApartmentDetails = () => {
             try {
                 const response = await axios.get(`${API_BASE_URL}/api/v1/apartment/findBy${id}`);
                 setApartment(response.data.data);
-                console.log(response.data.data);
             } catch (error) {
                 console.error('Error fetching apartment details:', error);
             } finally {
@@ -51,7 +50,7 @@ const ApartmentDetails = () => {
         if (!token) {
             toast.warning('You need to be a registered user to rent an apartment.');
             setTimeout(() => {
-                navigate('/signup');
+                navigate('/signup', { state: { apartmentId: id } });
             }, 3000);
         } else {
             navigate(`/pay/${id}`);
