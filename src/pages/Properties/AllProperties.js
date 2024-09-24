@@ -16,10 +16,7 @@ const AllProperties = () => {
                 const response = await axios.get(`${API_BASE_URL}/api/v1/property/all`);
                 const fetchedProperties = response.data.properties;
                 
-
-                const reversedProperties = fetchedProperties.reverse();
-
-                setProperties(reversedProperties);
+                setProperties(fetchedProperties);
             } catch (error) {
                 console.error('Error fetching properties:', error);
             } finally {

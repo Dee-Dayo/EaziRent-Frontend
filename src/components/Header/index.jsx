@@ -16,6 +16,18 @@ const Header = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        const wakeUpBackend = async () => {
+            try {
+                await axios.get(`${API_BASE_URL}/api/v1/property/all`);
+            } catch (error) {
+                console.error('Error waking up the backend:', error);
+            }
+        };
+
+        wakeUpBackend();
+    }, []);
+
+    useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 1080);
         };

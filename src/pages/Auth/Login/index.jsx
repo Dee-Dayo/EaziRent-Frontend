@@ -36,7 +36,6 @@ const Login = () => {
 
             const endpoint = `${API_BASE_URL}/api/v1/auth/login`;
             const response = await axios.post(endpoint, payload);
-            console.log(response)
 
             if (response.data.status) {
                 const token = response.data.data.token;

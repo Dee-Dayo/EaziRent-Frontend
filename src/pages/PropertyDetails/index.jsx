@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import API_BASE_URL from "../../apiConfig";
 import Modal from 'react-modal';
 import Spinner from "../../components/Spinner/Spinner";
+import verifiedIcon from '../../assets/verified.png';
 
 const PropertyDetails = () => {
     const { id } = useParams();
@@ -61,6 +62,7 @@ const PropertyDetails = () => {
 
     const handleViewLandlordReviews = async () => {
         try {
+            console.log(property)
             const response = await axios.get(`${API_BASE_URL}/api/v1/renter/getLandlordReviews${property.landlordId}`);
             const landlordReviewsData = response.data.data.reviews;
             setLandlordReviews(landlordReviewsData);
@@ -206,7 +208,10 @@ const PropertyDetails = () => {
                     alt={property.landlordName || 'Landlord'}
                     className="landlord-image"
                 />
-                <h2 className="landlord-name">Owner: {property.landlordName || 'Landlord'}</h2>
+                <h2 className="landlord-name">
+                    Owner: {property.landlordName || 'Landlord'}
+                    {property?.landlord_verified && < img src={verifiedIcon} alt="Verified" className="verified-icon" />}
+                </h2>
                 <StarRating rating={property.landlordRating} />
                 <p className="agentName">Agent Name: {property.agentName}</p>
                 <p className="agentPhone">Agent Phone: {property.agentPhoneNumber}</p>

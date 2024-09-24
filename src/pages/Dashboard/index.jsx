@@ -8,6 +8,7 @@ import AddPropertyDialog from '../../pages/AddPropertyDialog';
 import FilledButton from "../../components/FilledButton";
 import AddAccountDialog from "../AddAccountDialog/AddAccountDialog";
 import API_BASE_URL from "../../apiConfig";
+import verifiedIcon from '../../assets/verified.png';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -82,7 +83,10 @@ const Dashboard = () => {
                     alt={`${user?.firstName || "User"} ${user?.lastName || ""}`}
                     className="user-image"
                 />
-                <h2 className="user-name">Welcome, {user?.firstName} {user?.lastName}</h2>
+                <h2 className="user-name">
+                    Welcome, {user?.firstName} {user?.lastName}
+                    {user?.verified && <img src={verifiedIcon} alt="Verified" className="verified-icon" />}
+                </h2>
                 <StarRating rating={user?.rating || 0} />
                 <p className="user-email">Email: {user?.email}</p>
                 <p className="response-time">Last Login: {user?.responseTime}</p>
