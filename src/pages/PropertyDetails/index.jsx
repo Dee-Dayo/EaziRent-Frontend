@@ -62,7 +62,6 @@ const PropertyDetails = () => {
 
     const handleViewLandlordReviews = async () => {
         try {
-            console.log(property)
             const response = await axios.get(`${API_BASE_URL}/api/v1/renter/getLandlordReviews${property.landlordId}`);
             const landlordReviewsData = response.data.data.reviews;
             setLandlordReviews(landlordReviewsData);

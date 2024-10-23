@@ -104,7 +104,7 @@ const Dashboard = () => {
                 <div className="add-property">
                     <FilledButton name="Add Property" onClick={handleAddPropertyClick} />
                     <FilledButton name="View properties" onClick={handlePropertiesClick} />
-                    <FilledButton name="Add Account" onClick={handleAddAccountClick} />
+                    {/*<FilledButton name="Add Account" onClick={handleAddAccountClick} />*/}
                 </div>
             )}
 

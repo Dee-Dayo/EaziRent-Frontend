@@ -111,6 +111,7 @@ const ApartmentDetails = () => {
 
         try {
             const response = await axios.post(`${API_BASE_URL}/api/v1/apartment/review`, payload, config);
+            console.log(response)
             if (response.data.status) {
                 toast.success('Thanks. Your review has been submitted successfully!', {
                     position: 'top-right',
